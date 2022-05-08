@@ -4,6 +4,7 @@ import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react";
 import {ITask} from '../interfaces/task.interface';
 import {generateId} from '../utils/generateRandomIndex';
+import {TaskСard} from '../TaskСard';
 
 class TaskManager {
   tasks: ITask[] = [];
@@ -32,7 +33,7 @@ export const Tasks = observer(() => {
   return (
     <div className={'tasks-container'}>
       <h3>Ура! Теперь можно начать работать:</h3>
-      <ul>
+      <ul className={'instructions'}>
         <li>Выберите категорию и напишите название текущей задачи</li>
         <li>Запустите таймер («помидор»)</li>
         <li>Работайте пока «помидор» не прозвонит</li>
@@ -43,8 +44,10 @@ export const Tasks = observer(() => {
         <input type="text" className={'task-input'} placeholder={'Название задачи'} ref={inputRef}/>
         <button className={'btn-success'}>Добавить</button>
       </form>
-      <ul>
-        {taskManager.tasks.map(item => (<li key={item.id}>{item.name}</li>))}
+      <ul className={'task-list'}>
+        {taskManager.tasks.map(item => (
+          <TaskСard key={item.id} name={item.name} pomodoros={item.pomodoros} />
+        ))}
       </ul>
     </div>
   );

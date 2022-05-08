@@ -9,10 +9,10 @@
 	--white: hsl(0, 0%, var(--whiteLightness));
 	--grayE5: #e5e5e5;
 	--grayF4: #F4F4F4;;
-	--grayF3: hsl(0, 0%, calc(var(--whiteLightness) - 5%));
+	--grayE4: #E4E4E4;
 	--grayEC: hsl(0, 0%, calc(var(--whiteLightness) - 7%));
 	--grayD9: hsl(0, 0%, calc(var(--whiteLightness) - 15%));
-	--grayC4: hsl(0, 0%, calc(var(--whiteLightness) - 23%));
+	--grayC4: #C4C4C4;
 	--gray99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));
 	--gray66: hsl(0, 0%, calc(var(--whiteLightness) - 60%));
 }

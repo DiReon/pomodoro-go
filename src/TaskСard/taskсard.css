@@ -1,0 +1,23 @@
+.card {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 370px;
+	border-top: 1px solid var(--grayE4);
+	padding: 10px 0;
+}
+.pomodoros {
+	display: inline-block;
+	box-sizing: content-box;
+	width: 23px;
+	height: 19px;
+	padding-top: 4px;
+	margin-right: 10px;
+	border: 1px solid var(--grayC4);
+	border-radius: 50%;
+	text-align: center;
+	line-height: 17px;
+	font-weight: 300;
+	font-size: 16px;
+}

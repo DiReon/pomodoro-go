@@ -3,7 +3,7 @@
 	margin: 100px 16px 0 80px
 }
 
-ul {
+.instructions {
 	list-style: disc;
 	margin-left: 14px;
 }
@@ -26,4 +26,10 @@ li {
 	height: 55px;
 	background: var(--green);
 	color: var(--white);
+}
+
+.task-list {
+	width: 370px;
+	margin-top: 25px;
+	border-bottom: 1px solid var(--grayE4);
 }
