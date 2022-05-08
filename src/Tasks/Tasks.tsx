@@ -1,11 +1,32 @@
 import React, {FormEvent, useRef} from 'react';
 import './tasks.css';
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react";
+import {ITask} from '../interfaces/task.interface';
+import {generateId} from '../utils/generateRandomIndex';
 
-export function Tasks() {
+class TaskManager {
+  tasks: ITask[] = [];
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  addTask(task: ITask) {
+    this.tasks = [...this.tasks, task];
+  }
+}
+const taskManager = new TaskManager();
+export const Tasks = observer(() => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: FormEvent) {
     console.log(inputRef.current?.value);
+    if (inputRef.current?.value){
+      const taskWithId = generateId({name: inputRef.current.value, pomodoros: 1})
+      taskManager.addTask(taskWithId);
+      inputRef.current.value = '';
+    }
+
     event.preventDefault();
   }
   return (
@@ -22,6 +43,9 @@ export function Tasks() {
         <input type="text" className={'task-input'} placeholder={'Название задачи'} ref={inputRef}/>
         <button className={'btn-success'}>Добавить</button>
       </form>
+      <ul>
+        {taskManager.tasks.map(item => (<li key={item.id}>{item.name}</li>))}
+      </ul>
     </div>
   );
-}
+});
