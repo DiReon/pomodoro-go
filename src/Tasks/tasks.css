@@ -1,0 +1,29 @@
+.tasks-container {
+	max-width: 522px;
+	margin: 100px 16px 0 80px
+}
+
+ul {
+	list-style: disc;
+	margin-left: 14px;
+}
+
+li {
+	line-height: 33px;
+}
+
+.task-input {
+	width: 370px;
+	height: 55px;
+	margin: 25px 0;
+	padding-left: 15px;
+	border: none;
+	background: var(--grayF4);
+}
+
+.btn-success {
+	width: 173px;
+	height: 55px;
+	background: var(--green);
+	color: var(--white);
+}

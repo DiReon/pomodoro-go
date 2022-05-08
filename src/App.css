@@ -3,12 +3,12 @@
 :root {
 	--black: #333;
 	--orange: #CC6633;
-	--green: #A4CC33;
+	--green: #A8B64F;
 	--red: #DC3E22;
 	--whiteLightness: 100%;
 	--white: hsl(0, 0%, var(--whiteLightness));
 	--grayE5: #e5e5e5;
-	--grayF4: hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+	--grayF4: #F4F4F4;;
 	--grayF3: hsl(0, 0%, calc(var(--whiteLightness) - 5%));
 	--grayEC: hsl(0, 0%, calc(var(--whiteLightness) - 7%));
 	--grayD9: hsl(0, 0%, calc(var(--whiteLightness) - 15%));
@@ -21,7 +21,7 @@
 body {
 	padding: 0;
 	margin: 0;
-	background-color: var(--grayE5);
+	background-color: var(--white);
 	font-family: Roboto, sans-serif;
 }
 

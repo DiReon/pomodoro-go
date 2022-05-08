@@ -13,7 +13,5 @@ E
 src/Header/header.css,6\0\604418f024ce926aa9cba7f90f3c7d1de6b1331d
 F
 src/react-app-env.d.ts,4\a\4a7b99bdbee5792679d347b6474463bf5e14b66d
-=
-.eslintrc.yml,1\a\1a613254bfaa2ffb18ecdbad498a6e2afa0b5f35
 E
 src/Header/Header.tsx,2\6\262ef6b10d84a063425fee48f65c38c0467bc860
