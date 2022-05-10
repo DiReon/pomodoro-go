@@ -33,3 +33,7 @@ li {
 	margin-top: 25px;
 	border-bottom: 1px solid var(--grayE4);
 }
+
+.total-time {
+	color: var(--gray99);
+}

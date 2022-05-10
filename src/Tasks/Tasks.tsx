@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import {ITask} from '../interfaces/task.interface';
 import {generateId} from '../utils/generateRandomIndex';
 import {TaskCard} from '../TaskСard';
+import {transformDuration} from '../utils/transform-duration';
 
 class TaskManager {
   tasks: ITask[] = [];
@@ -37,6 +38,13 @@ export const Tasks = observer(() => {
 
     event.preventDefault();
   }
+
+  function getTotalTime() {
+    const minutes = taskManager.tasks.map(item => item.pomodoros * 25)
+      .reduce((prev, curr) => prev + curr, 0);
+    return transformDuration(minutes);
+  }
+
   return (
     <div className={'tasks-container'}>
       <h3>Ура! Теперь можно начать работать:</h3>
@@ -51,11 +59,16 @@ export const Tasks = observer(() => {
         <input type="text" className={'task-input'} placeholder={'Название задачи'} ref={inputRef}/>
         <button className={'btn-success'}>Добавить</button>
       </form>
-      <ul className={'task-list'}>
-        {taskManager.tasks.map(item => (
-          <TaskCard key={item.id} data={item} />
-        ))}
-      </ul>
+      {!!taskManager.tasks?.length && (
+        <div>
+          <ul className={'task-list'}>
+            {taskManager.tasks.map(item => (
+              <TaskCard key={item.id} data={item} />
+            ))}
+          </ul>
+          <div className={'total-time'}>{getTotalTime()}</div>
+        </div>
+      )}
     </div>
   );
 });

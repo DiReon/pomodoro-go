@@ -13,7 +13,7 @@
 	--grayEC: hsl(0, 0%, calc(var(--whiteLightness) - 7%));
 	--grayD9: hsl(0, 0%, calc(var(--whiteLightness) - 15%));
 	--grayC4: #C4C4C4;
-	--gray99: hsl(0, 0%, calc(var(--whiteLightness) - 40%));
+	--gray99: #999;
 	--gray66: hsl(0, 0%, calc(var(--whiteLightness) - 60%));
 }
 
