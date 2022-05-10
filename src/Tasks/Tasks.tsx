@@ -4,7 +4,7 @@ import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react";
 import {ITask} from '../interfaces/task.interface';
 import {generateId} from '../utils/generateRandomIndex';
-import {TaskСard} from '../TaskСard';
+import {TaskCard} from '../TaskСard';
 
 class TaskManager {
   tasks: ITask[] = [];
@@ -15,8 +15,15 @@ class TaskManager {
   addTask(task: ITask) {
     this.tasks = [...this.tasks, task];
   }
+
+  updateTask(task: ITask) {
+    console.log(task);
+    const index = this.tasks.findIndex(item => item.id === task.id);
+    const updatedTasks = this.tasks.splice(index, 1, task);
+    this.tasks = [...updatedTasks];
+  }
 }
-const taskManager = new TaskManager();
+export const taskManager = new TaskManager();
 export const Tasks = observer(() => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,7 +53,7 @@ export const Tasks = observer(() => {
       </form>
       <ul className={'task-list'}>
         {taskManager.tasks.map(item => (
-          <TaskСard key={item.id} name={item.name} pomodoros={item.pomodoros} />
+          <TaskCard key={item.id} data={item} />
         ))}
       </ul>
     </div>

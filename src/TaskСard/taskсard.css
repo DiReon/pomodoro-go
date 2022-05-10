@@ -34,9 +34,21 @@
 .menu-item {
 	display: flex;
 	align-items: center;
-	padding: 0 5px 0 15px;
-	cursor: pointer;
+	width: 100%;
+	padding: 8px 5px 8px 15px;
+	font-size: 16px;
 }
+
+*:disabled {
+	cursor: default;
+}
+
+*:disabled > *, *:disabled > * > * {
+	color: var(--grayC4);
+	fill: var(--grayC4);
+}
+
+
 
 .menu-item:hover {
 	background-color: var(--grayE4);
