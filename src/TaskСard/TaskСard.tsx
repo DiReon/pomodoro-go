@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {FormEvent, useEffect, useRef, useState} from 'react';
 import './taskсard.css';
 import {ITask} from '../interfaces/task.interface';
 import {ReactComponent as MoreIcon} from '../icons/more.svg';
@@ -6,12 +6,17 @@ import {ReactComponent as PlusIcon} from '../icons/plus.svg';
 import {ReactComponent as MinusIcon} from '../icons/minus.svg';
 import {ReactComponent as PenIcon} from '../icons/pen.svg';
 import {ReactComponent as TrashIcon} from '../icons/trash.svg';
+import {ReactComponent as CheckIcon} from '../icons/check-solid.svg';
+import {ReactComponent as CancelIcon} from '../icons/xmark-solid.svg';
+
 import {DropdownList} from '../DropdownList';
 import {taskManager} from '../Tasks';
 
 export function TaskCard({data: task}: {data: ITask}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
   const wrapperRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function useOutsideAlerter(ref: any) {
     useEffect(() => {
@@ -39,12 +44,40 @@ export function TaskCard({data: task}: {data: ITask}) {
     taskManager.updateTask(updatedTask);
   }
 
+  function handleSubmit(event: FormEvent) {
+    if (inputRef.current?.value){
+      task.name = inputRef.current.value;
+      taskManager.updateTask(task);
+      setIsEditable(false);
+    }
+    event.preventDefault();
+  }
+
+  function editTask() {
+    setIsEditable(true);
+    setIsDropdownOpen(false);
+    if (inputRef.current?.value){
+      inputRef.current.value = task.name;
+    }
+  }
+
   return (
     <li className={'card'}>
-      <div>
+      <div className={'task-info'}>
         <div className={'pomodoros'}>{task.pomodoros}</div>
-        <span>{task.name}</span>
+        {!isEditable ? (<span>{task.name}</span>) : (
+          <form onSubmit={handleSubmit} className={'edit-task-form'}>
+            <input type="text" defaultValue={task.name} ref={inputRef} className={'edit-task-input'}/>
+            <button className={'icon-btn confirm-btn'}>
+              <CheckIcon fill={'var(--green)'} />
+            </button>
+            <button onClick={() => setIsEditable(false)} className={'icon-btn'}>
+              <CancelIcon fill={'var(--black)'} />
+            </button>
+          </form>
+        )}
       </div>
+
       <button onClick={showMenu}>
         <MoreIcon />
       </button>
@@ -62,7 +95,7 @@ export function TaskCard({data: task}: {data: ITask}) {
               </button>
             </li>
             <li>
-              <button onClick={() => ({})}  className={'menu-item'}>
+              <button onClick={editTask}  className={'menu-item'}>
                 <PenIcon /><span>Редактировать</span>
               </button>
             </li>
