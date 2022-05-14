@@ -11,6 +11,8 @@ import {ReactComponent as CancelIcon} from '../icons/xmark-solid.svg';
 
 import {DropdownList} from '../DropdownList';
 import {taskManager} from '../Tasks';
+import {ConfirmationPopup} from '../ConfirmationPopup';
+import {DeleteTask} from '../DeleteTask';
 
 export function TaskCard({data: task}: {data: ITask}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -19,6 +21,7 @@ export function TaskCard({data: task}: {data: ITask}) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function useOutsideAlerter(ref: any) {
+    console.log('use outside alerter');
     useEffect(() => {
       function handleClickOutside(event: any) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -32,7 +35,7 @@ export function TaskCard({data: task}: {data: ITask}) {
     }, [ref]);
   }
 
-  useOutsideAlerter(wrapperRef);
+  // useOutsideAlerter(wrapperRef);
 
   function showMenu() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -100,9 +103,7 @@ export function TaskCard({data: task}: {data: ITask}) {
               </button>
             </li>
             <li>
-              <button onClick={() => ({})} className={'menu-item'}>
-                <TrashIcon /><span>Удалить</span>
-              </button>
+              <DeleteTask task={task}/>
             </li>
           </ul>
         </DropdownList>

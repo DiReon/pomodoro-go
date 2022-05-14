@@ -22,6 +22,10 @@ class TaskManager {
     const index = this.tasks.findIndex(item => item.id === task.id);
     this.tasks.splice(index, 1, task);
   }
+
+  deleteTask(task: ITask) {
+    this.tasks = this.tasks.filter(item => item.id !== task.id);
+  }
 }
 export const taskManager = new TaskManager();
 export const Tasks = observer(() => {

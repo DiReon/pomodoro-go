@@ -33,3 +33,17 @@ B
 src/utils/assoc.ts,4\c\4c903137836d6cf9531c4baf0b9b3f24c230004a
 P
  src/interfaces/task.interface.ts,c\e\ce2669fa7a897731a3b7d2a4244939b7fe1ecb34
+Q
+!src/DropdownList/dropdownlist.css,5\2\52f988d0c370ed896d477d1e7e8649809cee7282
+I
+src/DropdownList/index.ts,d\3\d3d538cf045892a35259ccc19bfb63d3e7b0c033
+Q
+!src/DropdownList/DropdownList.tsx,2\2\2230ed7573f8f8ab161aec1ccb968ffb11d25177
+O
+src/utils/transform-duration.ts,e\2\e2fa2e22c36fc3b3ed0acc71354da4e3ba16779b
+C
+src/icons/minus.svg,5\a\5a264f12b38c1055efe8fd2dea62298d14a690c1
+;
+src/App.css,a\a\aa7165aefcf8ee3d73539e99ab007daf1aa18d8d
+I
+src/icons/check-solid.svg,5\4\5419ae86d6c19b72594e4e45fd0de98198a551f9
