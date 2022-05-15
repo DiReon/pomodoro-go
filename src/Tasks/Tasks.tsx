@@ -18,7 +18,6 @@ class TaskManager {
   }
 
   updateTask(task: ITask) {
-    console.log(task);
     const index = this.tasks.findIndex(item => item.id === task.id);
     this.tasks.splice(index, 1, task);
   }

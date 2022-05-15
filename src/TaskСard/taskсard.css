@@ -23,57 +23,6 @@
 	font-size: 16px;
 }
 
-.menu {
-	position: relative;
-	width: 165px;
-	border: 1px solid var(--grayF4);
-	padding: 5px 0;
-	background: var(--grayF4);
-	z-index: 2;
-}
-
-.menu-item {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	padding: 8px 5px 8px 15px;
-	font-size: 16px;
-}
-
-*:disabled {
-	cursor: default;
-}
-
-*:disabled > *, *:disabled > * > * {
-	color: var(--grayC4);
-	fill: var(--grayC4);
-}
-
-.menu-item:hover {
-	background-color: var(--grayE4);
-}
-
-.menu-item :first-child {
-	width: 15px;
-}
-
-.menu-item > span {
-	margin-left: 9px;
-}
-/* Dropdown triangle */
-.menu::before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	top: -10px;
-	left: 50%;
-	margin-left: -10px;
-	border-style: solid;
-	border-width: 0 10px 10px 10px;
-	border-color: transparent transparent var(--grayF4) transparent;
-}
-
 .edit-task-input {
 	margin-right: 8px;
 }

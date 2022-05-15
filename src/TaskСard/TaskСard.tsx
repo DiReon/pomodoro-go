@@ -1,25 +1,20 @@
-import React, {FormEvent, useCallback, useEffect, useRef, useState} from 'react';
+import React, {FormEvent, useCallback, useRef, useState} from 'react';
 import './taskсard.css';
 import {ITask} from '../interfaces/task.interface';
 import {ReactComponent as MoreIcon} from '../icons/more.svg';
-import {ReactComponent as PlusIcon} from '../icons/plus.svg';
-import {ReactComponent as MinusIcon} from '../icons/minus.svg';
-import {ReactComponent as PenIcon} from '../icons/pen.svg';
 import {ReactComponent as CheckIcon} from '../icons/check-solid.svg';
 import {ReactComponent as CancelIcon} from '../icons/xmark-solid.svg';
-
-import {DropdownList} from '../DropdownList';
 import {taskManager} from '../Tasks';
-import {DeleteTask} from '../DeleteTask';
+import {TaskMenu} from "../TaskMenu";
 
 export function TaskCard({data: task}: {data: ITask}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
-  const ref = useRef<HTMLUListElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleClickOutside = useCallback((event: MouseEvent) => {
-  const node = document.querySelector('.modal');
+    const node = document.querySelector('.modal');
 
     if (event.target instanceof Node
       && !ref.current?.contains(event.target)
@@ -39,12 +34,6 @@ export function TaskCard({data: task}: {data: ITask}) {
     }
     document.addEventListener("mousedown", handleClickOutside);
     setIsDropdownOpen(true);
-  }
-
-  function changePomodoros(increment: number): void {
-    task.pomodoros = task.pomodoros + increment
-    const updatedTask = {...task, pomodoros: task.pomodoros}
-    taskManager.updateTask(updatedTask);
   }
 
   function handleSubmit(event: FormEvent) {
@@ -81,34 +70,12 @@ export function TaskCard({data: task}: {data: ITask}) {
         )}
       </div>
 
-      <button onClick={(event) => showMenu(event)} ref={buttonRef}>
-        <MoreIcon />
-      </button>
-      {isDropdownOpen && (
-        <DropdownList>
-          <ul ref={ref}  className={'menu'}>
-            <li>
-              <button onClick={() => changePomodoros(1)} className={'menu-item'}>
-                <PlusIcon /><span>Увеличить</span>
-              </button>
-            </li>
-            <li>
-              <button onClick={() => changePomodoros(-1)} disabled={task.pomodoros < 2} className={'menu-item'}>
-                <MinusIcon /><span>Уменьшить</span>
-              </button>
-            </li>
-            <li>
-              <button onClick={editTask}  className={'menu-item'}>
-                <PenIcon /><span>Редактировать</span>
-              </button>
-            </li>
-            <li>
-              <DeleteTask task={task}/>
-            </li>
-          </ul>
-        </DropdownList>
-      )}
+      <div>
+        <button onClick={(event) => showMenu(event)} ref={buttonRef}>
+          <MoreIcon />
+        </button>
+        {isDropdownOpen && (<span ref={ref}><TaskMenu task={task} editTask={() => editTask} /></span>)}
+      </div>
     </li>
-
   );
 }
