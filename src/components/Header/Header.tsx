@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.css';
-import {ReactComponent as TomatoIcon} from '../icons/tomato-icon.svg';
-import {ReactComponent as StatisticsIcon} from '../icons/statistics.svg';
+import {ReactComponent as TomatoIcon} from '../../icons/tomato-icon.svg';
+import {ReactComponent as StatisticsIcon} from '../../icons/statistics.svg';
 export function Header() {
   return (
     <header className={'header'}>

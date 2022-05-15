@@ -1,8 +1,8 @@
 import React from 'react';
 import './confirmationpopup.css';
 import ReactDOM from 'react-dom';
-import {taskManager} from '../Tasks';
-import {ITask} from '../interfaces/task.interface';
+import {taskManager} from '../../../../index';
+import {ITask} from '../../../../../../interfaces/task.interface';
 
 export function ConfirmationPopup({task, onClose}: {task: ITask, onClose: (event: React.MouseEvent<HTMLButtonElement>) => void}) {
   const node = document.querySelector('#root');

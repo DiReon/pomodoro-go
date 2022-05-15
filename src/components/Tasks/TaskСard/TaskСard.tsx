@@ -1,11 +1,11 @@
 import React, {FormEvent, useCallback, useRef, useState} from 'react';
 import './taskсard.css';
-import {ITask} from '../interfaces/task.interface';
-import {ReactComponent as MoreIcon} from '../icons/more.svg';
-import {ReactComponent as CheckIcon} from '../icons/check-solid.svg';
-import {ReactComponent as CancelIcon} from '../icons/xmark-solid.svg';
-import {taskManager} from '../Tasks';
-import {TaskMenu} from "../TaskMenu";
+import {ITask} from '../../../interfaces/task.interface';
+import {ReactComponent as MoreIcon} from '../../../icons/more.svg';
+import {ReactComponent as CheckIcon} from '../../../icons/check-solid.svg';
+import {ReactComponent as CancelIcon} from '../../../icons/xmark-solid.svg';
+import {taskManager} from '../index';
+import {TaskMenu} from "./TaskMenu";
 
 export function TaskCard({data: task}: {data: ITask}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Header } from './Header';
-import { Tasks } from './Tasks';
+import { Header } from './components/Header';
+import { Tasks } from './components/Tasks';
 
 function App() {
   return (
