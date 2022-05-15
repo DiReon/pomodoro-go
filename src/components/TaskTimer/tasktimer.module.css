@@ -1,6 +1,7 @@
-.task-timer-container {
+.taskTimerContainer {
     width: 733px;
     height: 507px;
     margin: 20px 80px 0 0;
+    text-align: center;
     background: var(--grayF4);
 }

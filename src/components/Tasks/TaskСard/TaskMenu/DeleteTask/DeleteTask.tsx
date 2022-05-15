@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import styles from './deletetask.css';
+import React, {useState} from 'react';
+import styles from './deletetask.module.css';
 import {ReactComponent as TrashIcon} from '../../../../../icons/trash.svg';
 import {ConfirmationPopup} from './ConfirmationPopup';
 import {ITask} from '../../../../../interfaces/task.interface';
@@ -13,9 +13,11 @@ export function DeleteTask({task}: {task: ITask}) {
   }
 
   return (
-    <button onClick={() => {setIsModalOpen(true)}} className={'menu-item'}>
+    <button onClick={() => {setIsModalOpen(true)}} className={styles.menuItem}>
       <TrashIcon /><span>Удалить</span>
-      {isModalOpen && (<ConfirmationPopup task={task} onClose={(event) => closeModal(event)} /> || <div />)}
+      {isModalOpen && (
+        <ConfirmationPopup task={task} onClose={(event) => closeModal(event)} /> || <div />)
+      }
     </button>
   );
 }

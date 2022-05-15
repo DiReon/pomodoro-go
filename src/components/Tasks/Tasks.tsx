@@ -1,5 +1,5 @@
 import React, {FormEvent, useRef} from 'react';
-import './tasks.css';
+import styles from './tasks.module.css';
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react";
 import {ITask} from '../../interfaces/task.interface';
@@ -48,9 +48,9 @@ export const Tasks = observer(() => {
   }
 
   return (
-    <div className={'tasks-container'}>
+    <div className={styles.tasksContainer}>
       <h3>Ура! Теперь можно начать работать:</h3>
-      <ul className={'instructions'}>
+      <ul className={styles.instructions}>
         <li>Выберите категорию и напишите название текущей задачи</li>
         <li>Запустите таймер («помидор»)</li>
         <li>Работайте пока «помидор» не прозвонит</li>
@@ -58,17 +58,17 @@ export const Tasks = observer(() => {
         <li>Продолжайте работать «помидор» за «помидором», пока задача не будут выполнена. Каждые 4 «помидора» делайте длинный перерыв (15-30 минут).</li>
       </ul>
       <form onSubmit={handleSubmit}>
-        <input type="text" className={'task-input'} placeholder={'Название задачи'} ref={inputRef}/>
-        <button className={'btn-success'}>Добавить</button>
+        <input type="text" className={styles.taskInput} placeholder={'Название задачи'} ref={inputRef}/>
+        <button className={styles.btnSuccess}>Добавить</button>
       </form>
       {!!taskManager.tasks?.length && (
         <div>
-          <ul className={'task-list'}>
+          <ul className={styles.taskList}>
             {taskManager.tasks.map(item => (
               <TaskCard key={item.id} data={item} />
             ))}
           </ul>
-          <div className={'total-time'}>{getTotalTime()}</div>
+          <div className={styles.totalTime}>{getTotalTime()}</div>
         </div>
       )}
     </div>

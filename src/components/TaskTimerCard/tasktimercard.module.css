@@ -1,0 +1,27 @@
+.remainingTime {
+    margin: 70px 0 9px 0;
+    font-size: 150px;
+}
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+}
+.btnSuccess {
+    margin: 0px 25px 0 0;
+}
+
+.btnWarning {
+    display: block;
+    width: 173px;
+    height: 55px;
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.btnWarning:hover {
+    color: var(--white);
+    background: var(--red);
+}
+

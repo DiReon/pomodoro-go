@@ -8,7 +8,7 @@
 	z-index: 2;
 }
 
-.modal-content {
+.modalContent {
 	position: absolute;
 	left: 50%;
 	top: 10%;
@@ -28,16 +28,21 @@
 	text-align: center;
 }
 
-.btn-warning {
+.btnWarning {
 	display: block;
 	width: 173px;
 	height: 55px;
 	margin: auto;
-	background: var(--red);
-	color: var(--white);
+	color: var(--red);
+	border: 1px solid var(--red);
 }
 
-.btn-text {
+.btnWarning:hover {
+	color: var(--white);
+	background: var(--red);
+}
+
+.btnText {
 	display: block;
 	margin: 10px auto 25px auto;
 	text-decoration: underline;

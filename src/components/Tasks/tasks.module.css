@@ -1,4 +1,4 @@
-.tasks-container {
+.tasksContainer {
 	max-width: 522px;
 	margin: 20px 16px 0 80px
 }
@@ -12,7 +12,7 @@ li {
 	line-height: 33px;
 }
 
-.task-input {
+.taskInput {
 	width: 370px;
 	height: 55px;
 	margin: 25px 0;
@@ -21,19 +21,19 @@ li {
 	background: var(--grayF4);
 }
 
-.btn-success {
+.btnSuccess {
 	width: 173px;
 	height: 55px;
 	background: var(--green);
 	color: var(--white);
 }
 
-.task-list {
+.taskList {
 	width: 370px;
 	margin-top: 25px;
 	border-bottom: 1px solid var(--grayE4);
 }
 
-.total-time {
+.totalTime {
 	color: var(--gray99);
 }

@@ -1,0 +1,19 @@
+.menuItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 5px 8px 15px;
+    font-size: 16px;
+}
+
+.menuItem:hover {
+    background-color: var(--grayE4);
+}
+
+.menuItem :first-child {
+    width: 15px;
+}
+
+.menuItem > span {
+    margin-left: 9px;
+}

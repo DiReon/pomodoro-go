@@ -1,5 +1,5 @@
 import React from 'react';
-import './taskmenu.css';
+import styles from './taskmenu.module.css';
 import {DropdownList} from "../../../shared/DropdownList";
 import {ReactComponent as PlusIcon} from "../../../../icons/plus.svg";
 import {ReactComponent as MinusIcon} from "../../../../icons/minus.svg";
@@ -23,19 +23,19 @@ export function TaskMenu({task, editTask}: ITaskMenu) {
 
   return (
     <DropdownList>
-      <ul className={'menu'}>
+      <ul className={styles.menu}>
         <li>
-          <button onClick={() => changePomodoros(1)} className={'menu-item'}>
+          <button onClick={() => changePomodoros(1)} className={styles.menuItem}>
             <PlusIcon /><span>Увеличить</span>
           </button>
         </li>
         <li>
-          <button onClick={() => changePomodoros(-1)} disabled={task.pomodoros < 2} className={'menu-item'}>
+          <button onClick={() => changePomodoros(-1)} disabled={task.pomodoros < 2} className={styles.menuItem}>
             <MinusIcon /><span>Уменьшить</span>
           </button>
         </li>
         <li>
-          <button onClick={editTask}  className={'menu-item'}>
+          <button onClick={editTask}  className={styles.menuItem}>
             <PenIcon /><span>Редактировать</span>
           </button>
         </li>

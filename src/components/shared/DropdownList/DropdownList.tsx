@@ -1,5 +1,5 @@
 import React from 'react';
-import './dropdownlist.css';
+import styles from './dropdownlist.module.css';
 
 interface IDropdownListProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface IDropdownListProps {
 
 export function DropdownList({children}: IDropdownListProps) {
   return (
-    <div className={'listContainer'}>
+    <div className={styles.listContainer}>
       <div className={'list'}>
         {children}
       </div>

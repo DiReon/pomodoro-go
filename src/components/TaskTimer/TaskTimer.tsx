@@ -1,10 +1,11 @@
 import React from 'react';
-import './tasktimer.css';
+import styles from './tasktimer.module.css';
 import {TaskTimerHeader} from "./TaskTimerHeader";
 import {ITask} from "../../interfaces/task.interface";
 import {makeAutoObservable} from "mobx";
 import {observer} from "mobx-react";
 import {taskManager} from "../Tasks";
+import {TaskTimerCard} from "../TaskTimerCard";
 
 class ActiveTask {
   activeTask: ITask | null = null;
@@ -26,10 +27,9 @@ export const TaskTimer = observer(() => {
   const activeTask = taskManager.tasks[0];
   const currentPomo = 1;
   return (
-    <div className={'task-timer-container'}>
+    <div className={styles.taskTimerContainer}>
       <TaskTimerHeader task={activeTask} currentPomo={currentPomo} />
-
-
+      <TaskTimerCard task={activeTask} />
     </div>
 
   );

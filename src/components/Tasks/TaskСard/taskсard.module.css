@@ -23,19 +23,19 @@
 	font-size: 16px;
 }
 
-.edit-task-input {
+.editTaskInput {
 	margin-right: 8px;
 }
-.edit-task-form {
+.editTaskForm {
 	display: flex;
 }
 
-.task-info {
+.taskInfo {
 	display: flex;
 	align-items: center;
 }
 
-.icon-btn {
+.iconBtn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -47,6 +47,12 @@
 	margin-right: 10px;
 }
 
-.confirm-btn {
+.confirmBtn {
 	border-color: var(--green);
+}
+
+.listContainer {
+	position: absolute;
+	right: -69px;
+	top: 45px;
 }

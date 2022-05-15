@@ -1,5 +1,5 @@
 import React, {FormEvent, useCallback, useRef, useState} from 'react';
-import './taskсard.css';
+import styles from './taskсard.module.css';
 import {ITask} from '../../../interfaces/task.interface';
 import {ReactComponent as MoreIcon} from '../../../icons/more.svg';
 import {ReactComponent as CheckIcon} from '../../../icons/check-solid.svg';
@@ -14,7 +14,7 @@ export function TaskCard({data: task}: {data: ITask}) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleClickOutside = useCallback((event: MouseEvent) => {
-    const node = document.querySelector('.modal');
+    const node = document.querySelector('#modal');
 
     if (event.target instanceof Node
       && !ref.current?.contains(event.target)
@@ -26,7 +26,7 @@ export function TaskCard({data: task}: {data: ITask}) {
     }
   }, []);
 
-  function showMenu(event: React.MouseEvent) {
+  function showMenu() {
     if (isDropdownOpen) {
       document.removeEventListener("mousedown", handleClickOutside);
       setIsDropdownOpen(false);
@@ -54,16 +54,16 @@ export function TaskCard({data: task}: {data: ITask}) {
   }
 
   return (
-    <li className={'card'}>
-      <div className={'task-info'}>
-        <div className={'pomodoros'}>{task.pomodoros}</div>
+    <li className={styles.card}>
+      <div className={styles.taskInfo}>
+        <div className={styles.pomodoros}>{task.pomodoros}</div>
         {!isEditable ? (<span>{task.name}</span>) : (
-          <form onSubmit={handleSubmit} className={'edit-task-form'}>
-            <input type="text" defaultValue={task.name} ref={inputRef} className={'edit-task-input'}/>
-            <button className={'icon-btn confirm-btn'}>
+          <form onSubmit={handleSubmit} className={styles.editTaskForm}>
+            <input type="text" defaultValue={task.name} ref={inputRef} className={styles.editTaskInput}/>
+            <button className={`${styles.iconBtn} ${styles.confirmBtn}`}>
               <CheckIcon fill={'var(--green)'} />
             </button>
-            <button onClick={() => setIsEditable(false)} className={'icon-btn'}>
+            <button onClick={() => setIsEditable(false)} className={styles.iconBtn}>
               <CancelIcon fill={'var(--black)'} />
             </button>
           </form>
@@ -71,10 +71,10 @@ export function TaskCard({data: task}: {data: ITask}) {
       </div>
 
       <div>
-        <button onClick={(event) => showMenu(event)} ref={buttonRef}>
+        <button onClick={() => showMenu()} ref={buttonRef}>
           <MoreIcon />
         </button>
-        {isDropdownOpen && (<span ref={ref}><TaskMenu task={task} editTask={() => editTask} /></span>)}
+        {isDropdownOpen && (<span ref={ref} className={styles.listContainer}><TaskMenu task={task} editTask={() => editTask()} /></span>)}
       </div>
     </li>
   );

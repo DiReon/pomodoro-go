@@ -1,4 +1,4 @@
-.task-timer-header {
+.taskTimerHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -12,6 +12,6 @@ header {
     background: var(--grayC4);
 }
 
-.task-timer-header > span {
+.taskTimerHeader > span {
     color: var(--white);
 }

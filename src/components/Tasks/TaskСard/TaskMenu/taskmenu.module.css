@@ -7,7 +7,7 @@
     z-index: 2;
 }
 
-.menu-item {
+.menuItem {
     display: flex;
     align-items: center;
     width: 100%;
@@ -24,15 +24,15 @@
     fill: var(--grayC4);
 }
 
-.menu-item:hover {
+.menuItem:hover {
     background-color: var(--grayE4);
 }
 
-.menu-item :first-child {
+.menuItem :first-child {
     width: 15px;
 }
 
-.menu-item > span {
+.menuItem > span {
     margin-left: 9px;
 }
 /* Dropdown triangle */

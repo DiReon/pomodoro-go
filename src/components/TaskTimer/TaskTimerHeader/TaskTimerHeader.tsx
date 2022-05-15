@@ -1,5 +1,5 @@
 import React from 'react';
-import './tasktimerheader.css';
+import styles from './tasktimerheader.module.css';
 import {ITask} from "../../../interfaces/task.interface";
 
 interface ITaskTiimerHeaderProps {
@@ -12,7 +12,7 @@ export function TaskTimerHeader({task, currentPomo}: ITaskTiimerHeaderProps) {
   return (
     <header>
       {task && (
-        <div className={'task-timer-header'}>
+        <div className={styles.taskTimerHeader}>
           <span>{task.name}</span>
           <span>Помидор {currentPomo}</span>
         </div>
