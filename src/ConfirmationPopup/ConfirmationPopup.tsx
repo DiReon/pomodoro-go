@@ -11,14 +11,8 @@ export function ConfirmationPopup({task, onClose}: {task: ITask, onClose: (event
   }
 
   function deleteTask(event: React.MouseEvent<HTMLButtonElement>): void {
-    console.log('delete task', task)
     taskManager.deleteTask(task);
-    event.stopPropagation();
   }
-
-  // function cancel(event: React.MouseEvent<HTMLButtonElement>): void {
-  //
-  // }
 
   return ReactDOM.createPortal((
     <div className={'modal'}>

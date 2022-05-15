@@ -1,44 +1,44 @@
-import React, {FormEvent, useEffect, useRef, useState} from 'react';
+import React, {FormEvent, useCallback, useEffect, useRef, useState} from 'react';
 import './taskсard.css';
 import {ITask} from '../interfaces/task.interface';
 import {ReactComponent as MoreIcon} from '../icons/more.svg';
 import {ReactComponent as PlusIcon} from '../icons/plus.svg';
 import {ReactComponent as MinusIcon} from '../icons/minus.svg';
 import {ReactComponent as PenIcon} from '../icons/pen.svg';
-import {ReactComponent as TrashIcon} from '../icons/trash.svg';
 import {ReactComponent as CheckIcon} from '../icons/check-solid.svg';
 import {ReactComponent as CancelIcon} from '../icons/xmark-solid.svg';
 
 import {DropdownList} from '../DropdownList';
 import {taskManager} from '../Tasks';
-import {ConfirmationPopup} from '../ConfirmationPopup';
 import {DeleteTask} from '../DeleteTask';
 
 export function TaskCard({data: task}: {data: ITask}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
-  const wrapperRef = useRef(null);
+  const ref = useRef<HTMLUListElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+  const node = document.querySelector('.modal');
 
-  function useOutsideAlerter(ref: any) {
-    console.log('use outside alerter');
-    useEffect(() => {
-      function handleClickOutside(event: any) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setIsDropdownOpen(false);
-        }
-      }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  }
+    if (event.target instanceof Node
+      && !ref.current?.contains(event.target)
+      && !buttonRef.current?.contains(event.target)
+      && !node
+    ) {
+      setIsDropdownOpen(false);
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, []);
 
-  // useOutsideAlerter(wrapperRef);
-
-  function showMenu() {
-    setIsDropdownOpen(!isDropdownOpen);
+  function showMenu(event: React.MouseEvent) {
+    if (isDropdownOpen) {
+      document.removeEventListener("mousedown", handleClickOutside);
+      setIsDropdownOpen(false);
+      return;
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    setIsDropdownOpen(true);
   }
 
   function changePomodoros(increment: number): void {
@@ -81,12 +81,12 @@ export function TaskCard({data: task}: {data: ITask}) {
         )}
       </div>
 
-      <button onClick={showMenu}>
+      <button onClick={(event) => showMenu(event)} ref={buttonRef}>
         <MoreIcon />
       </button>
       {isDropdownOpen && (
         <DropdownList>
-          <ul ref={wrapperRef}  className={'menu'}>
+          <ul ref={ref}  className={'menu'}>
             <li>
               <button onClick={() => changePomodoros(1)} className={'menu-item'}>
                 <PlusIcon /><span>Увеличить</span>

@@ -7,20 +7,9 @@ import {ITask} from '../interfaces/task.interface';
 export function DeleteTask({task}: {task: ITask}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    console.log(isModalOpen);
-  }, [])
-
-  function deleteTask() {
-    setIsModalOpen(true);
-  }
-
   function closeModal(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
-    console.log('close modal');
     setIsModalOpen(false);
-    console.log(isModalOpen);
-
   }
 
   return (
