@@ -1,0 +1,17 @@
+.task-timer-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 55px;
+    padding: 0 40px;
+}
+
+header {
+    background: var(--grayC4);
+}
+
+.task-timer-header > span {
+    color: var(--white);
+}

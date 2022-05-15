@@ -48,3 +48,9 @@ button {
 	background: transparent;
 	cursor: pointer;
 }
+
+.layout {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
