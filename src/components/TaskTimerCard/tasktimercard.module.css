@@ -8,8 +8,17 @@
     align-items: center;
     margin-top: 32px;
 }
+
 .btnSuccess {
+    width: 173px;
+    height: 55px;
+    background: var(--green);
+    color: var(--white);
     margin: 0px 25px 0 0;
+}
+
+.btnSuccess:hover {
+    background: var(--darkGreen);
 }
 
 .btnWarning {

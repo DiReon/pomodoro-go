@@ -24,4 +24,7 @@ yarn-error.log*
 
 .idea
 /.idea
-/.idea/
+/.idea/**
+./.idea
+*/.idea
+ideaProjects/pomodoro-go/.idea

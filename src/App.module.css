@@ -4,6 +4,7 @@
 	--black: #333;
 	--orange: #CC6633;
 	--green: #A8B64F;
+	--darkGreen: #899441;
 	--red: #DC3E22;
 	--whiteLightness: 100%;
 	--white: hsl(0, 0%, var(--whiteLightness));

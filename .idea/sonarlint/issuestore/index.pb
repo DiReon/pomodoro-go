@@ -9,12 +9,8 @@ A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 ?
 pomodoro-go.iml,d\e\dee1b1a71950121bf31db778ce6c2423615a4d40
-E
-src/Header/header.css,6\0\604418f024ce926aa9cba7f90f3c7d1de6b1331d
 F
 src/react-app-env.d.ts,4\a\4a7b99bdbee5792679d347b6474463bf5e14b66d
-E
-src/Header/Header.tsx,2\6\262ef6b10d84a063425fee48f65c38c0467bc860
 A
 public/index.html,f\4\f43ecdf8d666ee908aacce037b4cd72159e4741b
 I
@@ -25,25 +21,15 @@ B
 src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
-B
-src/Tasks/index.ts,d\0\d0255363ccb3e2629fd753e96f3b16ebf7b302a2
 P
  src/utils/generateRandomIndex.ts,2\9\292ab316c1d85f1dd903a114d6e959827fe8d75f
 B
 src/utils/assoc.ts,4\c\4c903137836d6cf9531c4baf0b9b3f24c230004a
 P
  src/interfaces/task.interface.ts,c\e\ce2669fa7a897731a3b7d2a4244939b7fe1ecb34
-Q
-!src/DropdownList/dropdownlist.css,5\2\52f988d0c370ed896d477d1e7e8649809cee7282
-I
-src/DropdownList/index.ts,d\3\d3d538cf045892a35259ccc19bfb63d3e7b0c033
-Q
-!src/DropdownList/DropdownList.tsx,2\2\2230ed7573f8f8ab161aec1ccb968ffb11d25177
 O
 src/utils/transform-duration.ts,e\2\e2fa2e22c36fc3b3ed0acc71354da4e3ba16779b
 C
 src/icons/minus.svg,5\a\5a264f12b38c1055efe8fd2dea62298d14a690c1
-;
-src/App.css,a\a\aa7165aefcf8ee3d73539e99ab007daf1aa18d8d
 I
 src/icons/check-solid.svg,5\4\5419ae86d6c19b72594e4e45fd0de98198a551f9

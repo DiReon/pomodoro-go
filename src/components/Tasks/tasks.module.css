@@ -28,6 +28,10 @@ li {
 	color: var(--white);
 }
 
+.btnSuccess:hover {
+	background: var(--darkGreen);
+}
+
 .taskList {
 	width: 370px;
 	margin-top: 25px;
