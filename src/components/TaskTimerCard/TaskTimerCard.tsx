@@ -1,56 +1,98 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './tasktimercard.module.css';
-import {ITask} from "../../interfaces/task.interface";
+import {ITask} from '../../interfaces/task.interface';
+import {taskManager} from '../Tasks';
 
-const STATUS = {
-  STARTED: 'Started',
-  PAUSED: 'Paused',
-  STOPPED: 'Stopped'
+enum STATUS {
+  STARTED = 'Started',
+  PAUSED = 'Paused',
+  STOPPED = 'Stopped'
 }
 
-const INITIAL_COUNT = 1500
+const WORK_DURATION = 10;
+const BREAK_DURATION = 5;
 
-export function TaskTimerCard({task}: {task: ITask}) {
+interface ITaskTimerCardProps {
+  task: ITask;
+  startNextPomodoro: () => void;
+  isBreakPeriod: boolean;
+  toggleBreakPeriod: () => void
+}
 
-  const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT)
-  const [status, setStatus] = useState(STATUS.STOPPED)
+export function TaskTimerCard({task, startNextPomodoro, isBreakPeriod, toggleBreakPeriod}: ITaskTimerCardProps) {
+  const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);
+  const [status, setStatus] = useState(STATUS.STOPPED);
 
   const secondsToDisplay = secondsRemaining % 60
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60
   const minutesToDisplay = minutesRemaining % 60
-  const hoursToDisplay = (minutesRemaining - minutesToDisplay) / 60
 
   const handleStart = () => {
     setStatus(STATUS.STARTED)
   }
-  const handleStop = () => {
+  const handlePause = () => {
     setStatus(STATUS.PAUSED)
   }
   const handleReset = () => {
-    setStatus(STATUS.STOPPED)
-    setSecondsRemaining(INITIAL_COUNT)
+    setStatus(STATUS.STOPPED);
+    setSecondsRemaining(WORK_DURATION);
   }
+
+  function handleCompleted() {
+    setStatus(STATUS.STOPPED);
+    taskManager.deleteTask(task);
+    setSecondsRemaining(WORK_DURATION);
+  }
+
+  function togglePeriod(): void {
+    setStatus(STATUS.STOPPED);
+    if (!isBreakPeriod) {
+      setSecondsRemaining(BREAK_DURATION);
+    } else {
+      setSecondsRemaining(WORK_DURATION);
+      startNextPomodoro();
+    }
+    toggleBreakPeriod();
+  }
+
   useInterval(
     () => {
       if (secondsRemaining > 0) {
-        setSecondsRemaining(secondsRemaining - 1)
+        setSecondsRemaining(secondsRemaining - 1);
       } else {
-        setStatus(STATUS.STOPPED)
+        togglePeriod();
       }
     },
     status === STATUS.STARTED ? 1000 : 0,
-    // passing null stops the interval
+    // passing 0 stops the interval
   )
+
   return (
     <div>
       <div className={styles.remainingTime}>{twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}</div>
       {task && (<div>Задача 1: {task.name}</div>)}
       <div className={styles.actionButtons}>
-        {status === STATUS.STOPPED && (<button onClick={handleStart} className={styles.btnSuccess}>Старт</button>)}
-        {status === STATUS.PAUSED && (<button onClick={handleStart} className={styles.btnSuccess}>Продолжить</button>)}
-        {status === STATUS.STARTED && (<button onClick={handleStop} className={styles.btnSuccess}>Пауза</button>)}
-        {status === STATUS.PAUSED && (<button onClick={handleReset} className={styles.btnWarning}>Сделано</button>)}
-        {status !== STATUS.PAUSED && (<button onClick={handleReset} className={styles.btnWarning}>Стоп</button>)}
+        {status === STATUS.STOPPED && (
+          <>
+            <button onClick={handleStart} className={styles.btnSuccess}>Старт</button>
+            <button disabled className={styles.btnWarning}>Стоп</button>
+          </>
+        )}
+        {status === STATUS.STARTED && (
+          <button onClick={handlePause} className={styles.btnSuccess}>Пауза</button>
+        )}
+        {status === STATUS.PAUSED && (
+          <button onClick={handleStart} className={styles.btnSuccess}>Продолжить</button>
+        )}
+        {!isBreakPeriod && status === STATUS.STARTED && (
+          <button onClick={handleReset} className={styles.btnWarning}>Стоп</button>
+        )}
+        {!isBreakPeriod && status === STATUS.PAUSED && (
+          <button onClick={handleCompleted} className={styles.btnWarning}>Сделано</button>
+        )}
+        {isBreakPeriod && (status === STATUS.STARTED || status === STATUS.PAUSED) && (
+          <button onClick={togglePeriod} className={styles.btnWarning}>Пропустить</button>
+        )}
       </div>
     </div>
   );
@@ -71,6 +113,7 @@ function useInterval(callback: () => void, delay: number) {
         savedCallback.current()
       }
     }
+
     if (delay !== 0) {
       const id = setInterval(tick, delay)
       return () => clearInterval(id)
@@ -78,5 +121,4 @@ function useInterval(callback: () => void, delay: number) {
   }, [delay])
 }
 
-// https://stackoverflow.com/a/2998874/1673761
 const twoDigits = (num: number) => String(num).padStart(2, '0')

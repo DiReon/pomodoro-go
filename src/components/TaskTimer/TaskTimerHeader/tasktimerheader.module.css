@@ -15,3 +15,11 @@ header {
 .taskTimerHeader > span {
     color: var(--white);
 }
+
+.redHeader {
+    background: var(--red);
+}
+
+.greenHeader {
+    background: var(--green);
+}

@@ -29,8 +29,12 @@
     border: 1px solid var(--red);
 }
 
-.btnWarning:hover {
+.btnWarning:enabled:hover {
     color: var(--white);
     background: var(--red);
 }
 
+button:disabled {
+    border-color: var(--grayC4);
+    color: var(--grayC4);
+}

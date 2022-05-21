@@ -4,6 +4,19 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/3/2" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/3/5" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/4/4" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/4/8" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/6/0" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/6/c" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/0" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/1" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/2" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/8" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/a" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/c" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/3/c" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
