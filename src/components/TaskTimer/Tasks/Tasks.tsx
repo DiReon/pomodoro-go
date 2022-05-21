@@ -6,11 +6,14 @@ import {ITask} from '../../../interfaces/task.interface';
 import {generateId} from '../../../utils/generateRandomIndex';
 import {TaskCard} from './TaskСard';
 import {transformDuration} from '../../../utils/transform-duration';
+import {makePersistable} from 'mobx-persist-store';
 
 class TaskManager {
   tasks: ITask[] = [];
   constructor() {
     makeAutoObservable(this);
+
+    makePersistable(this, { name: 'TasksStore', properties: ['tasks'], storage: window.localStorage });
   }
 
   addTask(task: ITask) {
