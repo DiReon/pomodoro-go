@@ -13,9 +13,6 @@ enum STATUS {
   STOPPED = 'Stopped'
 }
 
-const WORK_DURATION = 10;
-const BREAK_DURATION = 5;
-
 interface ITimerCardProps {
   task: ITask;
   startNextPomodoro: () => void;
@@ -63,6 +60,10 @@ class Journal {
 }
 export const journal = new Journal();
 
+const WORK_DURATION = 10;
+const BREAK_DURATION_SHORT = 5;
+const BREAK_DURATION_LONG = 8;
+
 export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: ITimerCardProps) {
   const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);
   const [status, setStatus] = useState(STATUS.STOPPED);
@@ -70,6 +71,12 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60
   const minutesToDisplay = minutesRemaining % 60
   const [timestampPaused, setTimestampPaused] = useState(0);
+
+  function getBreakDuration(): number {
+    const pomodoros = journal?.currentDay?.pomodoros;
+    return (pomodoros && pomodoros % 4 === 0) ? BREAK_DURATION_LONG : BREAK_DURATION_SHORT;
+  }
+
   const handleStart = () => {
     if (status === STATUS.STOPPED && taskState === ETaskState.STANDBY) {
       setTaskState(ETaskState.WORK);
@@ -104,7 +111,7 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
   function togglePeriod(): void {
     setStatus(STATUS.STOPPED);
     if (taskState === ETaskState.WORK) {
-      setSecondsRemaining(BREAK_DURATION);
+      setSecondsRemaining(getBreakDuration());
       setTaskState(ETaskState.BREAK);
       journal.addPomodoro();
       console.log(journal.currentDay);
