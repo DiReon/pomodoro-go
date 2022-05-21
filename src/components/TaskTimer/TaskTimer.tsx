@@ -5,23 +5,33 @@ import {observer} from 'mobx-react';
 import {taskManager} from '../Tasks';
 import {TaskTimerCard} from '../TaskTimerCard';
 
+export enum ETaskState {
+  WORK = 'WORK',
+  BREAK = 'BREAK',
+  STANDBY = 'STANDBY'
+}
+
 export const TaskTimer = observer(() => {
-  const [isBreakPeriod, setIsBreakPeriod] = useState(false);
+  const initialState = ETaskState.STANDBY as string;
+  const [taskState, setTaskState] = useState(initialState);
   const [currentPomodoro, setCurrentPomodoro] = useState(1)
   const activeTask = taskManager.tasks[0];
-
   useEffect(() => {
     setCurrentPomodoro(1);
   }, [activeTask]);
 
   return (
     <div className={styles.taskTimerContainer}>
-      <TaskTimerHeader task={activeTask} currentPomo={currentPomodoro} isBreakPeriod={isBreakPeriod}/>
+      <TaskTimerHeader
+        task={activeTask}
+        currentPomodoro={currentPomodoro}
+        taskState={taskState}
+      />
       <TaskTimerCard
         task={activeTask}
         startNextPomodoro={() => setCurrentPomodoro(currentPomodoro + 1)}
-        isBreakPeriod={isBreakPeriod}
-        toggleBreakPeriod={() => setIsBreakPeriod(!isBreakPeriod)}
+        taskState={taskState}
+        setTaskState={status => setTaskState(status)}
       />
     </div>
 

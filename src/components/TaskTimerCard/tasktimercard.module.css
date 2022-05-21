@@ -38,3 +38,11 @@ button:disabled {
     border-color: var(--grayC4);
     color: var(--grayC4);
 }
+
+.redTimer {
+    color: var(--red);
+}
+
+.greenTimer {
+    color: var(--green);
+}

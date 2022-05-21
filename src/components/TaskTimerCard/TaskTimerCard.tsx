@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './tasktimercard.module.css';
 import {ITask} from '../../interfaces/task.interface';
 import {taskManager} from '../Tasks';
+import {ETaskState} from '../TaskTimer';
 
 enum STATUS {
   STARTED = 'Started',
@@ -15,44 +16,58 @@ const BREAK_DURATION = 5;
 interface ITaskTimerCardProps {
   task: ITask;
   startNextPomodoro: () => void;
-  isBreakPeriod: boolean;
-  toggleBreakPeriod: () => void
+  taskState: string;
+  setTaskState: (value: string) => void;
 }
 
-export function TaskTimerCard({task, startNextPomodoro, isBreakPeriod, toggleBreakPeriod}: ITaskTimerCardProps) {
+export function TaskTimerCard(
+  {
+    task,
+    startNextPomodoro,
+    taskState,
+    setTaskState,
+  }: ITaskTimerCardProps) {
   const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);
   const [status, setStatus] = useState(STATUS.STOPPED);
-
   const secondsToDisplay = secondsRemaining % 60
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60
   const minutesToDisplay = minutesRemaining % 60
 
   const handleStart = () => {
-    setStatus(STATUS.STARTED)
+    if (status === STATUS.STOPPED && taskState === ETaskState.STANDBY) {
+      setTaskState(ETaskState.WORK);
+    }
+    setStatus(STATUS.STARTED);
   }
+
   const handlePause = () => {
     setStatus(STATUS.PAUSED)
   }
+
   const handleReset = () => {
     setStatus(STATUS.STOPPED);
     setSecondsRemaining(WORK_DURATION);
+    setTaskState(ETaskState.STANDBY);
   }
 
   function handleCompleted() {
     setStatus(STATUS.STOPPED);
     taskManager.deleteTask(task);
     setSecondsRemaining(WORK_DURATION);
+    setTaskState(ETaskState.STANDBY);
   }
 
   function togglePeriod(): void {
     setStatus(STATUS.STOPPED);
-    if (!isBreakPeriod) {
+    if (taskState === ETaskState.WORK) {
       setSecondsRemaining(BREAK_DURATION);
-    } else {
+      setTaskState(ETaskState.BREAK);
+    }
+    if (taskState === ETaskState.BREAK) {
       setSecondsRemaining(WORK_DURATION);
       startNextPomodoro();
+      setTaskState(ETaskState.STANDBY);
     }
-    toggleBreakPeriod();
   }
 
   useInterval(
@@ -67,10 +82,28 @@ export function TaskTimerCard({task, startNextPomodoro, isBreakPeriod, toggleBre
     // passing 0 stops the interval
   )
 
+  function getTimerStyle(): string {
+    if (status !== STATUS.STARTED) {
+      return '';
+    }
+    switch (taskState) {
+      case ETaskState.WORK:
+        return `${styles.redTimer}`;
+      case ETaskState.BREAK:
+        return `${styles.greenTimer}`;
+      default:
+        return '';
+    }
+  }
+
   return (
     <div>
-      <div className={styles.remainingTime}>{twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}</div>
+      <div className={`${styles.remainingTime} ${getTimerStyle()}`}>
+        {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}
+      </div>
+
       {task && (<div>Задача 1: {task.name}</div>)}
+
       <div className={styles.actionButtons}>
         {status === STATUS.STOPPED && (
           <>
@@ -84,13 +117,13 @@ export function TaskTimerCard({task, startNextPomodoro, isBreakPeriod, toggleBre
         {status === STATUS.PAUSED && (
           <button onClick={handleStart} className={styles.btnSuccess}>Продолжить</button>
         )}
-        {!isBreakPeriod && status === STATUS.STARTED && (
+        {taskState === ETaskState.WORK && status === STATUS.STARTED && (
           <button onClick={handleReset} className={styles.btnWarning}>Стоп</button>
         )}
-        {!isBreakPeriod && status === STATUS.PAUSED && (
+        {taskState === ETaskState.WORK && status === STATUS.PAUSED && (
           <button onClick={handleCompleted} className={styles.btnWarning}>Сделано</button>
         )}
-        {isBreakPeriod && (status === STATUS.STARTED || status === STATUS.PAUSED) && (
+        {taskState === ETaskState.BREAK && (status === STATUS.STARTED || status === STATUS.PAUSED) && (
           <button onClick={togglePeriod} className={styles.btnWarning}>Пропустить</button>
         )}
       </div>
