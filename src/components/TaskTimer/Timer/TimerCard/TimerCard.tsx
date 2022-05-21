@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import styles from './tasktimercard.module.css';
-import {ITask} from '../../interfaces/task.interface';
-import {taskManager} from '../Tasks';
-import {ETaskState} from '../TaskTimer';
+import styles from './timercard.module.css';
+import {ITask} from '../../../../interfaces/task.interface';
+import {taskManager} from '../../Tasks';
+import {ETaskState} from '../index';
 
 enum STATUS {
   STARTED = 'Started',
@@ -13,20 +13,14 @@ enum STATUS {
 const WORK_DURATION = 10;
 const BREAK_DURATION = 5;
 
-interface ITaskTimerCardProps {
+interface ITimerCardProps {
   task: ITask;
   startNextPomodoro: () => void;
   taskState: string;
   setTaskState: (value: string) => void;
 }
 
-export function TaskTimerCard(
-  {
-    task,
-    startNextPomodoro,
-    taskState,
-    setTaskState,
-  }: ITaskTimerCardProps) {
+export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: ITimerCardProps) {
   const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);
   const [status, setStatus] = useState(STATUS.STOPPED);
   const secondsToDisplay = secondsRemaining % 60

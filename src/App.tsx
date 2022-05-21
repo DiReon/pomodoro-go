@@ -1,17 +1,17 @@
 import React from 'react';
+import {Header} from './components/Header';
+import {Route, Routes} from 'react-router-dom';
+import {TaskTimer} from './components/TaskTimer';
 import styles from './App.module.css';
-import { Header } from './components/Header';
-import { Tasks } from './components/Tasks';
-import {TaskTimer} from "./components/TaskTimer";
 
 function App() {
   return (
-    <div>
+    <div className={styles.app}>
       <Header />
-      <div className={styles.layout}>
-        <Tasks />
-        <TaskTimer />
-      </div>
+      <Routes>
+        <Route path="/" element={<TaskTimer />}>
+        </Route>
+      </Routes>
     </div>
   );
 }

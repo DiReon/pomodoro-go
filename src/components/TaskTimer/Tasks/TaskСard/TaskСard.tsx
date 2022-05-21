@@ -1,9 +1,9 @@
 import React, {FormEvent, useCallback, useRef, useState} from 'react';
 import styles from './taskсard.module.css';
-import {ITask} from '../../../interfaces/task.interface';
-import {ReactComponent as MoreIcon} from '../../../icons/more.svg';
-import {ReactComponent as CheckIcon} from '../../../icons/check-solid.svg';
-import {ReactComponent as CancelIcon} from '../../../icons/xmark-solid.svg';
+import {ITask} from '../../../../interfaces/task.interface';
+import {ReactComponent as MoreIcon} from '../../../../icons/more.svg';
+import {ReactComponent as CheckIcon} from '../../../../icons/check-solid.svg';
+import {ReactComponent as CancelIcon} from '../../../../icons/xmark-solid.svg';
 import {taskManager} from '../index';
 import {TaskMenu} from './TaskMenu';
 

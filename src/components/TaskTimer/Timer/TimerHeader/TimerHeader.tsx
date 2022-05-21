@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './tasktimerheader.module.css';
-import {ITask} from '../../../interfaces/task.interface';
-import {ETaskState} from '../TaskTimer';
+import styles from './timerheader.module.css';
+import {ITask} from '../../../../interfaces/task.interface';
+import {ETaskState} from '../Timer';
 
-interface ITaskTimerHeaderProps {
+interface ITimerHeaderProps {
   task: ITask;
   currentPomodoro: number;
   taskState: string;
 }
 
-export function TaskTimerHeader({task, currentPomodoro, taskState}: ITaskTimerHeaderProps) {
+export function TimerHeader({task, currentPomodoro, taskState}: ITimerHeaderProps) {
 
   function getTimerStyle(): string {
     switch (taskState) {

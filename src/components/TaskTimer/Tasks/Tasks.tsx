@@ -2,10 +2,10 @@ import React, {FormEvent, useRef} from 'react';
 import styles from './tasks.module.css';
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react";
-import {ITask} from '../../interfaces/task.interface';
-import {generateId} from '../../utils/generateRandomIndex';
+import {ITask} from '../../../interfaces/task.interface';
+import {generateId} from '../../../utils/generateRandomIndex';
 import {TaskCard} from './TaskСard';
-import {transformDuration} from '../../utils/transform-duration';
+import {transformDuration} from '../../../utils/transform-duration';
 
 class TaskManager {
   tasks: ITask[] = [];
