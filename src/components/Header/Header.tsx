@@ -2,17 +2,18 @@ import React from 'react';
 import styles from './header.module.css';
 import {ReactComponent as TomatoIcon} from '../../icons/tomato-icon.svg';
 import {ReactComponent as StatisticsIcon} from '../../icons/statistics.svg';
+import {Link} from 'react-router-dom';
 export function Header() {
   return (
     <header className={styles.header}>
-      <div className={styles.container}>
+      <Link to="/" className={styles.container}>
         <TomatoIcon/>
         <span className={styles.title}>Pomodoro-GO</span>
-      </div>
-      <div className={styles.container}>
+      </Link>
+      <Link to="/statistics" className={styles.container}>
         <StatisticsIcon/>
         <span className={styles.statistics}>Статистика</span>
-      </div>
+      </Link>
     </header>
   );
 }
