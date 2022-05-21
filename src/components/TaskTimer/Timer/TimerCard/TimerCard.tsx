@@ -3,6 +3,9 @@ import styles from './timercard.module.css';
 import {ITask} from '../../../../interfaces/task.interface';
 import {taskManager} from '../../Tasks';
 import {ETaskState} from '../index';
+import {makeAutoObservable} from 'mobx';
+import {makePersistable} from 'mobx-persist-store';
+import {IDay} from '../../../../interfaces/day.interface';
 
 enum STATUS {
   STARTED = 'Started',
@@ -20,22 +23,69 @@ interface ITimerCardProps {
   setTaskState: (value: string) => void;
 }
 
+class Journal {
+  days: IDay[] = [];
+  today = new Date().toLocaleDateString('ru-RU');
+  constructor() {
+    makeAutoObservable(this);
+
+    makePersistable(this, {name: 'Journal', properties: ['days'], storage: window.localStorage});
+    if (!this.currentDay) {
+      this.addCurrentDay();
+    }
+  }
+
+  get currentDay(): IDay {
+    return this.days.find(item => item?.date === this.today) as IDay;
+  }
+
+  addCurrentDay() {
+    this.days = [...this.days, {date: this.today}]
+  }
+
+  addPomodoro(): void {
+    if (this.currentDay) {
+      this.currentDay.pomodoros = this.currentDay?.pomodoros ? this.currentDay?.pomodoros + 1 : 1;
+    }
+  }
+
+  addWorkTime(): void {
+    this.currentDay?.workTime ? this.currentDay.workTime++ : this.currentDay.workTime = 1;
+  }
+
+  addBreakTime(): void {
+    this.currentDay?.breakTime ? this.currentDay.breakTime++ : this.currentDay.breakTime = 1;
+  }
+
+  addPausedTime(pausedTime: number): void {
+    this.currentDay.pausedTime = this.currentDay?.pausedTime ? this.currentDay.pausedTime + pausedTime : pausedTime;
+  }
+}
+export const journal = new Journal();
+
 export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: ITimerCardProps) {
   const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);
   const [status, setStatus] = useState(STATUS.STOPPED);
   const secondsToDisplay = secondsRemaining % 60
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60
   const minutesToDisplay = minutesRemaining % 60
-
+  const [timestampPaused, setTimestampPaused] = useState(0);
   const handleStart = () => {
     if (status === STATUS.STOPPED && taskState === ETaskState.STANDBY) {
       setTaskState(ETaskState.WORK);
+    }
+    if (status === STATUS.PAUSED) {
+      console.log((Date.now() - timestampPaused) / 1000);
+      console.log(timestampPaused);
+      journal.addPausedTime((Date.now() - timestampPaused) / 1000);
     }
     setStatus(STATUS.STARTED);
   }
 
   const handlePause = () => {
     setStatus(STATUS.PAUSED)
+    setTimestampPaused(Date.now());
+    console.log(timestampPaused);
   }
 
   const handleReset = () => {
@@ -56,6 +106,8 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
     if (taskState === ETaskState.WORK) {
       setSecondsRemaining(BREAK_DURATION);
       setTaskState(ETaskState.BREAK);
+      journal.addPomodoro();
+      console.log(journal.currentDay);
     }
     if (taskState === ETaskState.BREAK) {
       setSecondsRemaining(WORK_DURATION);
@@ -68,6 +120,7 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
     () => {
       if (secondsRemaining > 0) {
         setSecondsRemaining(secondsRemaining - 1);
+        taskState === ETaskState.WORK ? journal.addWorkTime() : journal.addBreakTime();
       } else {
         togglePeriod();
       }
