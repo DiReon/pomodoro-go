@@ -22,7 +22,7 @@ interface ITimerCardProps {
 
 class Journal {
   days: IDay[] = [];
-  today = new Date().toLocaleDateString('ru-RU');
+  today = new Date().toDateString();
   constructor() {
     makeAutoObservable(this);
 
