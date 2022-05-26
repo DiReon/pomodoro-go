@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 export function Header() {
   return (
     <header className={styles.header}>
-      <Link to="/" className={styles.container}>
+      <Link to="/pomodoro-go" className={styles.container}>
         <TomatoIcon/>
         <span className={styles.title}>Pomodoro-GO</span>
       </Link>

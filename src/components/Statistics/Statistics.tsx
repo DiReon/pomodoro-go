@@ -3,19 +3,24 @@ import styles from './statistics.module.css';
 import {journal} from '../TaskTimer/Timer/TimerCard';
 import {ReactComponent as TomatoIcon} from '../../icons/tomato-icon.svg';
 import {ReactComponent as TomatoIconSmiling} from '../../icons/tomato-icon-smiling.svg';
+import {Chart} from './Chart';
 
 const weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
 export function Statistics() {
   const [selectedDay, setSelectedDay] = useState(journal.currentDay);
-
+  const [selectedWeek, setSelectedWeek] = useState(0);
   function getWeekDay(): string {
+
+    if (!selectedDay?.date) {
+      return weekDays[1];
+    }
     const date = new Date(selectedDay.date);
     return weekDays[date.getDay()];
   }
 
   function getWorkTime(): number {
-    const time = journal.currentDay.workTime;
+    const time = selectedDay.workTime;
     return time ? Math.round(time) : 0;
   }
 
@@ -28,9 +33,11 @@ export function Statistics() {
   }
 
   function getPomodorosTextQuantity(): string {
-    const qty = journal.currentDay.pomodoros as number;
+    const qty = selectedDay.pomodoros;
+    if (!qty) {
+      return '';
+    }
     const lastDigit = qty % 10;
-    console.log(lastDigit)
     if (lastDigit > 1 && lastDigit < 5 ) {
       return qty + ' помидора';
     }
@@ -54,11 +61,11 @@ export function Statistics() {
             }
           </div>
 
-          {journal.currentDay?.pomodoros ? (
+          {selectedDay?.pomodoros ? (
             <div className={styles.pomodoros}>
               <div className={styles.pomodorosPicture}>
                 <TomatoIcon />
-                <span>x {journal.currentDay?.pomodoros}</span>
+                <span>x {selectedDay?.pomodoros}</span>
               </div>
               <div className={styles.pomodorosQty}>{getPomodorosTextQuantity()}</div>
             </div>
@@ -68,7 +75,9 @@ export function Statistics() {
               </div>
             )}
         </div>
-        <div className={styles.chart}></div>
+        <div className={styles.chart}>
+          <Chart setSelectedDay={(value) => setSelectedDay(value)} selectedWeek={selectedWeek}/>
+        </div>
       </div>
     </div>
 

@@ -26,18 +26,42 @@ class Journal {
   constructor() {
     makeAutoObservable(this);
 
-    makePersistable(this, {name: 'Journal', properties: ['days'], storage: window.localStorage});
-    if (!this.currentDay) {
-      this.addCurrentDay();
+    // makePersistable(this, {name: 'Journal', properties: ['days'], storage: window.localStorage});
+    this.addMockData();
+  }
+
+  addMockData(): void {
+    const date = new Date();
+    const dayOfTheMonth = date.getDate();
+    for (let i = 0; i < 14; i++) {
+      date.setDate(dayOfTheMonth - i);
+      const dateString = date.toDateString();
+      const random = Math.random() * 10;
+      const mockDay = {
+        date: dateString,
+        workTime: Math.round(25 * random),
+        pomodoros: Math.round(random)
+      }
+      this.days.push(mockDay);
     }
   }
 
   get currentDay(): IDay {
+    const currentDay = this.days.find(item => item?.date === this.today) as IDay;
+    if (!currentDay) {
+      this.addCurrentDay();
+    }
     return this.days.find(item => item?.date === this.today) as IDay;
   }
 
   addCurrentDay() {
-    this.days = [...this.days, {date: this.today}]
+    const newDay = {
+      date: this.today,
+      workTime: 0,
+      breakTime: 0,
+      pomodoros: 0
+    }
+    this.days = [...this.days, newDay]
   }
 
   addPomodoro(): void {

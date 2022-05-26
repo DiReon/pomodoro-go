@@ -10,7 +10,7 @@ function App() {
     <div className={styles.app}>
       <Header />
       <Routes>
-        <Route path="/" element={<TaskTimer />}></Route>
+        <Route path="/pomodoro-go" element={<TaskTimer />}></Route>
         <Route path="/statistics" element={<Statistics />}></Route>
       </Routes>
     </div>
