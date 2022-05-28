@@ -18,7 +18,7 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
     const currentWeekDay = date.getDay() === 0 ? 7 : date.getDay();
     const result = [];
     for (let i = 1; i < 8; i++) {
-      date.setDate(currentDate - currentWeekDay + i);
+      date.setDate(currentDate - currentWeekDay + i - 7 * selectedWeek);
       result.push(journal.days.find(item => item.date === date.toDateString()) || null);
     }
     return result;
@@ -59,7 +59,6 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
   return (
     <div className={styles.container}>
       <table id="taskChart">
-        <caption>Результаты</caption>
         <tbody>
         <tr className="qtr" id="mo">
           <th scope="row">Пн</th>

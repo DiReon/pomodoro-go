@@ -33,7 +33,7 @@ class Journal {
   addMockData(): void {
     const date = new Date();
     const dayOfTheMonth = date.getDate();
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < 21; i++) {
       date.setDate(dayOfTheMonth - i);
       const dateString = date.toDateString();
       const random = Math.random() * 10;

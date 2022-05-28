@@ -1,0 +1,19 @@
+.menu {
+    position: relative;
+    width: 370px;
+    background: var(--grayF4);
+    z-index: 2;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 19px 0 19px 15px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--grayDE);
+}
+
+.menuItem:hover {
+    background-color: var(--grayE4);
+}
