@@ -1,11 +1,15 @@
 {
   "files": {
-    "main.css": "/pomodoro-go/static/css/main.ced7a276.css",
-    "main.js": "/pomodoro-go/static/js/main.f5f9ad37.js",
+    "main.css": "/pomodoro-go/static/css/main.ad8af215.css",
+    "main.js": "/pomodoro-go/static/js/main.6418bc7a.js",
     "static/js/787.1ec4210a.chunk.js": "/pomodoro-go/static/js/787.1ec4210a.chunk.js",
+    "static/media/tomato-icon-smiling.svg": "/pomodoro-go/static/media/tomato-icon-smiling.0a950e04ea5c3543752ba761f03554c2.svg",
     "static/media/tomato-icon.svg": "/pomodoro-go/static/media/tomato-icon.4dd56950aa8d924b75205c2dcd48611a.svg",
+    "static/media/focus.svg": "/pomodoro-go/static/media/focus.d63e6ab192933ade925528bf516075ad.svg",
     "index.html": "/pomodoro-go/index.html",
     "static/media/xmark-solid.svg": "/pomodoro-go/static/media/xmark-solid.6837248f26b4746bca22dce7c606b744.svg",
+    "static/media/time-paused.svg": "/pomodoro-go/static/media/time-paused.e4cc1007e8b37f6c1543af00448df0e7.svg",
+    "static/media/stop.svg": "/pomodoro-go/static/media/stop.7930b0f1964fd799bd61f1f381920f82.svg",
     "static/media/minus.svg": "/pomodoro-go/static/media/minus.e99b332b62e0e5f0d9fd9d5999cfe44a.svg",
     "static/media/pen.svg": "/pomodoro-go/static/media/pen.866cd6a941eea001c947f2b749386e8e.svg",
     "static/media/plus.svg": "/pomodoro-go/static/media/plus.c3a1d44e744439a9c45e362a2b884ba6.svg",
@@ -13,12 +17,12 @@
     "static/media/trash.svg": "/pomodoro-go/static/media/trash.2d151278112028e588071159c6f24fc9.svg",
     "static/media/more.svg": "/pomodoro-go/static/media/more.11ed7fde52d3f6e7c38d0390484c3e22.svg",
     "static/media/statistics.svg": "/pomodoro-go/static/media/statistics.8b80e52a18ba39952e7cc02737accfef.svg",
-    "main.ced7a276.css.map": "/pomodoro-go/static/css/main.ced7a276.css.map",
-    "main.f5f9ad37.js.map": "/pomodoro-go/static/js/main.f5f9ad37.js.map",
+    "main.ad8af215.css.map": "/pomodoro-go/static/css/main.ad8af215.css.map",
+    "main.6418bc7a.js.map": "/pomodoro-go/static/js/main.6418bc7a.js.map",
     "787.1ec4210a.chunk.js.map": "/pomodoro-go/static/js/787.1ec4210a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ced7a276.css",
-    "static/js/main.f5f9ad37.js"
+    "static/css/main.ad8af215.css",
+    "static/js/main.6418bc7a.js"
   ]
 }
