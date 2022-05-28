@@ -4,6 +4,7 @@ import {journal} from '../TaskTimer/Timer/TimerCard';
 import {ReactComponent as TomatoIcon} from '../../icons/tomato-icon.svg';
 import {ReactComponent as TomatoIconSmiling} from '../../icons/tomato-icon-smiling.svg';
 import {Chart} from './Chart';
+import {transformDuration} from '../../utils/transform-duration';
 
 const weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
@@ -27,9 +28,9 @@ export function Statistics() {
   function getWorkTimeText(): string {
     const lastDigit = getWorkTime() % 10;
     if (lastDigit === 1) {
-      return getWorkTime() + ' минуты';
+      return transformDuration(getWorkTime()) + 'уты';
     }
-    return getWorkTime() + ' минут';
+    return transformDuration(getWorkTime()) + 'ут';
   }
 
   function getPomodorosTextQuantity(): string {
@@ -73,7 +74,8 @@ export function Statistics() {
               <div className={styles.pomodoros}>
                 <TomatoIconSmiling />
               </div>
-            )}
+            )
+          }
         </div>
         <div className={styles.chart}>
           <Chart setSelectedDay={(value) => setSelectedDay(value)} selectedWeek={selectedWeek}/>

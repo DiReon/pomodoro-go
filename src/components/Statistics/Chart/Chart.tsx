@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import styles from './chart.modules.css';
 import {journal} from '../../TaskTimer/Timer/TimerCard';
 import {IDay} from '../../../interfaces/day.interface';
+import {transformDuration} from '../../../utils/transform-duration';
+import {generateRandomIndex} from '../../../utils/generateRandomIndex';
 
 interface IChartProps {
   setSelectedDay: (value: IDay) => void;
@@ -22,8 +24,8 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
     return result;
   }
 
-  function getWorkTime(index: number): number {
-    return (getCurrentWeekData()[index]?.workTime || 0) * 92 / 25;
+  function getWorkTimeHeight(index: number): number {
+    return (getCurrentWeekData()[index]?.workTime || 0) * getSegmentHeight() / 25;
   }
 
   function selectDay(index: number): void {
@@ -33,6 +35,27 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
     }
   }
 
+  function getWorkTimeAxisLimit(): number {
+    const workTimeArray = getCurrentWeekData().map(item => item?.workTime).filter(item => !!item) as number[];
+    const result = Math.ceil(Math.max(...workTimeArray) / 25);
+    return result;
+  }
+
+  function horizontalGridlines(): ReactNode[] {
+    const result = Array(getWorkTimeAxisLimit()).fill(null).map((item, index) => {
+      return (
+        <div className="tick" style={{height: getSegmentHeight() + 'px'}} key={generateRandomIndex()}>
+          <p>{transformDuration((index + 1) * 25)}</p>
+        </div>
+      )
+    }).reverse();
+    return result;
+  }
+
+  function getSegmentHeight(): number {
+    return 460 / getWorkTimeAxisLimit();
+  }
+
   return (
     <div className={styles.container}>
       <table id="taskChart">
@@ -40,41 +63,37 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
         <tbody>
         <tr className="qtr" id="mo">
           <th scope="row">Пн</th>
-          <td onClick={() => selectDay(0)} className="sent bar" style={{height: getWorkTime(0) + 'px'}}></td>
+          <td onClick={() => selectDay(0)} className="sent bar" style={{height: getWorkTimeHeight(0) + 'px'}}></td>
         </tr>
         <tr className="qtr" id="tu">
           <th scope="row">Вт</th>
-          <td onClick={() => selectDay(1)} className="sent bar" style={{height: getWorkTime(1) + 'px'}}></td>
+          <td onClick={() => selectDay(1)} className="sent bar" style={{height: getWorkTimeHeight(1) + 'px'}}></td>
         </tr>
         <tr className="qtr" id="we">
           <th scope="row">Ср</th>
-          <td onClick={() => selectDay(2)} className="sent bar" style={{height: getWorkTime(2) + 'px'}}></td>
+          <td onClick={() => selectDay(2)} className="sent bar" style={{height: getWorkTimeHeight(2) + 'px'}}></td>
         </tr>
         <tr className="qtr" id="th">
           <th scope="row">Чт</th>
-          <td onClick={() => selectDay(3)} className="sent bar" style={{height: getWorkTime(3) + 'px'}}></td>
+          <td onClick={() => selectDay(3)} className="sent bar" style={{height: getWorkTimeHeight(3) + 'px'}}></td>
         </tr>
         <tr className="qtr" id="fr">
           <th scope="row">Пт</th>
-          <td onClick={() => selectDay(4)} className="sent bar" style={{height: getWorkTime(4) + 'px'}}></td>
+          <td onClick={() => selectDay(4)} className="sent bar" style={{height: getWorkTimeHeight(4) + 'px'}}></td>
         </tr>
         <tr className="qtr" id="sa">
           <th scope="row">Сб</th>
-          <td onClick={() => selectDay(5)} className="sent bar" style={{height: getWorkTime(5) + 'px'}}></td>
+          <td onClick={() => selectDay(5)} className="sent bar" style={{height: getWorkTimeHeight(5) + 'px'}}></td>
         </tr>
         <tr className="qtr" id="su">
           <th scope="row">Вс</th>
-          <td onClick={() => selectDay(6)} className="sent bar" style={{height: getWorkTime(6) + 'px'}}></td>
+          <td onClick={() => selectDay(6)} className="sent bar" style={{height: getWorkTimeHeight(6) + 'px'}}></td>
         </tr>
         </tbody>
       </table>
 
       <div id="ticks">
-        <div className="tick"><p>2 ч 5 мин</p></div>
-        <div className="tick"><p>1 ч 40 мин</p></div>
-        <div className="tick"><p>1 ч 15 мин</p></div>
-        <div className="tick"><p>50 мин</p></div>
-        <div className="tick"><p>25 мин</p></div>
+        {horizontalGridlines()}
       </div>
     </div>
 
