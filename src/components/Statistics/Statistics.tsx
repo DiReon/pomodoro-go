@@ -6,6 +6,7 @@ import {ReactComponent as TomatoIconSmiling} from '../../icons/tomato-icon-smili
 import {Chart} from './Chart';
 import {transformDuration} from '../../utils/transform-duration';
 import {WeekSelectionMenu} from './WeekSelectionMenu';
+import {DailyAnalisys} from './DailyAnalisys';
 
 const weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
@@ -125,6 +126,7 @@ export function Statistics() {
           <Chart setSelectedDay={(value) => setSelectedDay(value)} selectedWeek={selectedWeek.value}/>
         </div>
       </div>
+      <DailyAnalisys />
     </div>
 
   );

@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 80px;
+    gap: 32px;
+}
+
+.item {
+    padding: 25px;
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container .item:first-child {
+    background: #FFDDA9;
+}
+.container .item:nth-child(2) {
+    background: #DFDCFE;
+}
+.container .item:nth-child(3) {
+    background: #C5F1FF;
+}
+
+strong {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.value {
+    margin-top: 48px;
+    font-size: 32px;
+    font-weight: 400;
+}
