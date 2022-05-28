@@ -40,7 +40,10 @@ class Journal {
       const mockDay = {
         date: dateString,
         workTime: Math.round(25 * random),
-        pomodoros: Math.round(random)
+        pomodoros: Math.round(random),
+        breakTime: Math.round(5 * random),
+        pausedTime: random * 5,
+        stops: Math.round(random)
       }
       this.days.push(mockDay);
     }
@@ -59,7 +62,9 @@ class Journal {
       date: this.today,
       workTime: 0,
       breakTime: 0,
-      pomodoros: 0
+      pomodoros: 0,
+      pausedTime: 0,
+      stops: 0
     }
     this.days = [...this.days, newDay]
   }
@@ -80,6 +85,7 @@ class Journal {
 
   addPausedTime(pausedTime: number): void {
     this.currentDay.pausedTime = this.currentDay?.pausedTime ? this.currentDay.pausedTime + pausedTime : pausedTime;
+    this.currentDay.stops = this.currentDay.stops + 1;
   }
 }
 export const journal = new Journal();

@@ -126,7 +126,7 @@ export function Statistics() {
           <Chart setSelectedDay={(value) => setSelectedDay(value)} selectedWeek={selectedWeek.value}/>
         </div>
       </div>
-      <DailyAnalisys />
+      <DailyAnalisys day={selectedDay} />
     </div>
 
   );
