@@ -16,76 +16,11 @@
     justify-content: space-between;
 }
 
-.dataNumbers {
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-}
-
 .chart {
     width: 952px;
     height: 471px;
     margin-left: 32px;
     background: var(--grayF4);
-}
-
-.workTime {
-    width: 296px;
-    padding: 25px;
-    background: var(--grayF4);
-}
-
-.date {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    font-size: 24px;
-    line-height: 33px;
-    font-weight: 700;
-}
-
-.date span:nth-child(2) {
-    font-size: 16px;
-}
-
-.pomodoros {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 296px;
-    height: 179px;
-    margin-top: 32px;
-    background: var(--grayF4);
-}
-
-.pomodorosPicture > svg {
-    width: 76px;
-    height: 76px;
-}
-
-.pomodorosPicture {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-}
-
-.pomodorosPicture > span {
-    margin-left: 17px;
-    color: var(--gray99);
-    font-size: 24px;
-    line-height: 33px;
-}
-
-.pomodorosQty {
-    width: 100%;
-    padding: 9px 0;
-    text-align: center;
-    color: var(--white);
-    background: var(--red);
-    font-size: 24px;
-    line-height: 33px;
 }
 
 .listContainer {
@@ -101,9 +36,4 @@
     background: var(--grayF4);
     font-size: 16px;
     text-align: start;
-}
-
-strong {
-    font-size: 24px;
-    font-weight: 700;
 }
