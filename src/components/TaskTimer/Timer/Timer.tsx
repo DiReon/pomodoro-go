@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import styles from './timer.module.css';
 import {TimerHeader} from './TimerHeader';
 import {observer} from 'mobx-react';
-import {taskManager} from '../Tasks';
 import {TimerCard} from './TimerCard';
+import {taskManager} from './store/task-manager';
 
 export enum ETaskState {
   WORK = 'WORK',

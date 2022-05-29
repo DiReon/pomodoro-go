@@ -5,8 +5,8 @@ import {ReactComponent as PlusIcon} from '../../../../../icons/plus.svg';
 import {ReactComponent as MinusIcon} from '../../../../../icons/minus.svg';
 import {ReactComponent as PenIcon} from '../../../../../icons/pen.svg';
 import {DeleteTask} from './DeleteTask';
-import {taskManager} from '../../index';
 import {ITask} from '../../../../../interfaces/task.interface';
+import {taskManager} from '../../../Timer/store/task-manager';
 
 interface ITaskMenu {
   task: ITask;

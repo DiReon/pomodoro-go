@@ -1,35 +1,11 @@
 import React, {FormEvent, useRef} from 'react';
 import styles from './tasks.module.css';
-import { makeAutoObservable } from 'mobx';
-import { observer } from 'mobx-react/dist/observer';
-import {ITask} from '../../../interfaces/task.interface';
 import {generateId} from '../../../utils/generateRandomIndex';
 import {TaskCard} from './TaskСard';
 import {transformDuration} from '../../../utils/transform-duration';
-import {makePersistable} from 'mobx-persist-store';
+import {taskManager} from '../Timer/store/task-manager';
+import {observer} from 'mobx-react';
 
-class TaskManager {
-  tasks: ITask[] = [];
-  constructor() {
-    makeAutoObservable(this);
-
-    makePersistable(this, { name: 'TasksStore', properties: ['tasks'], storage: window.localStorage });
-  }
-
-  addTask(task: ITask) {
-    this.tasks = [...this.tasks, task];
-  }
-
-  updateTask(task: ITask) {
-    const index = this.tasks.findIndex(item => item.id === task.id);
-    this.tasks.splice(index, 1, task);
-  }
-
-  deleteTask(task: ITask) {
-    this.tasks = this.tasks.filter(item => item.id !== task.id);
-  }
-}
-export const taskManager = new TaskManager();
 export const Tasks = observer(() => {
   const inputRef = useRef<HTMLInputElement>(null);
 

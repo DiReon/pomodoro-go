@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styles from './statistics.module.css';
-import {journal} from '../TaskTimer/Timer/TimerCard';
 import {ReactComponent as TomatoIcon} from '../../icons/tomato-icon.svg';
 import {ReactComponent as TomatoIconSmiling} from '../../icons/tomato-icon-smiling.svg';
 import {Chart} from './Chart';
@@ -10,6 +9,7 @@ import {DailyAnalisys} from './DailyAnalisys';
 import {weekDays} from '../../config/week-days';
 import {weekTypes} from '../../config/week-types';
 import {IWeekData} from '../../interfaces/week.interface';
+import {journal} from '../TaskTimer/Timer/store/journal';
 
 export function Statistics() {
   const [selectedDay, setSelectedDay] = useState(journal.currentDay);

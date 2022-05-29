@@ -1,11 +1,11 @@
 import React, {ReactNode} from 'react';
 import styles from './chart.modules.css';
-import {journal} from '../../TaskTimer/Timer/TimerCard';
 import {IDay} from '../../../interfaces/day.interface';
 import {transformDuration} from '../../../utils/transform-duration';
 import {generateRandomIndex} from '../../../utils/generateRandomIndex';
 import {weekDays} from '../../../config/week-days';
 import {IWeekDay} from '../../../interfaces/week.interface';
+import {journal} from '../../TaskTimer/Timer/store/journal';
 
 interface IChartProps {
   setSelectedDay: (value: IDay) => void;
