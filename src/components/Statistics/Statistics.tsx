@@ -7,34 +7,9 @@ import {Chart} from './Chart';
 import {transformDuration} from '../../utils/transform-duration';
 import {WeekSelectionMenu} from './WeekSelectionMenu';
 import {DailyAnalisys} from './DailyAnalisys';
-
-const weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-
-export interface IWeekData {
-  value: number;
-  caption: string;
-}
-
-export interface IWeek {
-  thisWeek: IWeekData;
-  previousWeek: IWeekData;
-  twoWeeksBefore: IWeekData;
-}
-
-export const weekTypes: IWeek = {
-  thisWeek: {
-    value: 0,
-    caption: 'Эта неделя'
-  },
-  previousWeek: {
-    value: 1,
-    caption: 'Прошедшая неделя'
-  },
-  twoWeeksBefore: {
-    value: 2,
-    caption: 'Две недели назад'
-  },
-}
+import {weekDays} from '../../config/week-days';
+import {weekTypes} from '../../config/week-types';
+import {IWeekData} from '../../interfaces/week.interface';
 
 export function Statistics() {
   const [selectedDay, setSelectedDay] = useState(journal.currentDay);
@@ -43,10 +18,10 @@ export function Statistics() {
   function getWeekDay(): string {
 
     if (!selectedDay?.date) {
-      return weekDays[1];
+      return weekDays[1].longName;
     }
     const date = new Date(selectedDay.date);
-    return weekDays[date.getDay()];
+    return weekDays[date.getDay()].longName;
   }
 
   function getWorkTime(): number {

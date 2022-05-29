@@ -4,6 +4,8 @@ import {journal} from '../../TaskTimer/Timer/TimerCard';
 import {IDay} from '../../../interfaces/day.interface';
 import {transformDuration} from '../../../utils/transform-duration';
 import {generateRandomIndex} from '../../../utils/generateRandomIndex';
+import {weekDays} from '../../../config/week-days';
+import {IWeekDay} from '../../../interfaces/week.interface';
 
 interface IChartProps {
   setSelectedDay: (value: IDay) => void;
@@ -37,57 +39,40 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
 
   function getWorkTimeAxisLimit(): number {
     const workTimeArray = getCurrentWeekData().map(item => item?.workTime).filter(item => !!item) as number[];
-    const result = Math.ceil(Math.max(...workTimeArray) / 25);
-    return result;
+    return Math.ceil(Math.max(...workTimeArray) / 25);
   }
 
   function horizontalGridlines(): ReactNode[] {
-    const result = Array(getWorkTimeAxisLimit()).fill(null).map((item, index) => {
+    return Array(getWorkTimeAxisLimit()).fill(null).map((item, index) => {
       return (
         <div className="tick" style={{height: getSegmentHeight() + 'px'}} key={generateRandomIndex()}>
           <p>{transformDuration((index + 1) * 25)}</p>
         </div>
       )
     }).reverse();
-    return result;
   }
 
   function getSegmentHeight(): number {
     return 460 / getWorkTimeAxisLimit();
   }
 
+  function getWeek(): IWeekDay[] {
+    const result = [...weekDays, weekDays[0]];
+    result.shift();
+    return result;
+  }
+
   return (
     <div className={styles.container}>
       <table id="taskChart">
         <tbody>
-        <tr className="qtr" id="mo">
-          <th scope="row">Пн</th>
-          <td onClick={() => selectDay(0)} className="sent bar" style={{height: getWorkTimeHeight(0) + 'px'}}></td>
-        </tr>
-        <tr className="qtr" id="tu">
-          <th scope="row">Вт</th>
-          <td onClick={() => selectDay(1)} className="sent bar" style={{height: getWorkTimeHeight(1) + 'px'}}></td>
-        </tr>
-        <tr className="qtr" id="we">
-          <th scope="row">Ср</th>
-          <td onClick={() => selectDay(2)} className="sent bar" style={{height: getWorkTimeHeight(2) + 'px'}}></td>
-        </tr>
-        <tr className="qtr" id="th">
-          <th scope="row">Чт</th>
-          <td onClick={() => selectDay(3)} className="sent bar" style={{height: getWorkTimeHeight(3) + 'px'}}></td>
-        </tr>
-        <tr className="qtr" id="fr">
-          <th scope="row">Пт</th>
-          <td onClick={() => selectDay(4)} className="sent bar" style={{height: getWorkTimeHeight(4) + 'px'}}></td>
-        </tr>
-        <tr className="qtr" id="sa">
-          <th scope="row">Сб</th>
-          <td onClick={() => selectDay(5)} className="sent bar" style={{height: getWorkTimeHeight(5) + 'px'}}></td>
-        </tr>
-        <tr className="qtr" id="su">
-          <th scope="row">Вс</th>
-          <td onClick={() => selectDay(6)} className="sent bar" style={{height: getWorkTimeHeight(6) + 'px'}}></td>
-        </tr>
+        {getWeek().map((item, index) => (
+          <tr key={generateRandomIndex()} style={{left: 12 * index + '%'}}>
+            <th scope="row">{item.shortName}</th>
+            <td onClick={() => selectDay(index)} className="sent bar"
+                style={{height: getWorkTimeHeight(index) + 'px'}}></td>
+          </tr>
+        ))}
         </tbody>
       </table>
 
@@ -95,6 +80,5 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
         {horizontalGridlines()}
       </div>
     </div>
-
   );
 }

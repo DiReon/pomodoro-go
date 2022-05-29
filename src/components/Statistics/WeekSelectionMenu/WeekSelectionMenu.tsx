@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './weekselectionmenu.module.css';
 import {DropdownList} from '../../shared/DropdownList';
-import {IWeekData, weekTypes} from '../Statistics';
+import {IWeekData} from '../../../interfaces/week.interface';
+import {weekTypes} from '../../../config/week-types';
 
 interface IWeekSelectionMenuProps {
   onSelectWeek: (value: IWeekData) => void;
