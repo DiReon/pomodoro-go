@@ -48,7 +48,7 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
         <div className="tick" style={{height: getSegmentHeight() + 'px'}} key={generateRandomIndex()}>
           <p>{transformDuration((index + 1) * 25)}</p>
         </div>
-      )
+      );
     }).reverse();
   }
 

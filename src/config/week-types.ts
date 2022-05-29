@@ -13,5 +13,5 @@ export const weekTypes: IWeek = {
     value: 2,
     caption: 'Две недели назад'
   },
-}
+};
 

@@ -14,7 +14,7 @@ export enum ETaskState {
 export const Timer = observer(() => {
   const initialState = ETaskState.STANDBY as string;
   const [taskState, setTaskState] = useState(initialState);
-  const [currentPomodoro, setCurrentPomodoro] = useState(1)
+  const [currentPomodoro, setCurrentPomodoro] = useState(1);
   const activeTask = taskManager.tasks[0];
   useEffect(() => {
     setCurrentPomodoro(1);

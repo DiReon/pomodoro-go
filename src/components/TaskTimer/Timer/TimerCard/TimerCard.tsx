@@ -44,7 +44,7 @@ class Journal {
         breakTime: Math.round(5 * random),
         pausedTime: random * 5,
         stops: Math.round(random)
-      }
+      };
       this.days.push(mockDay);
     }
   }
@@ -65,8 +65,8 @@ class Journal {
       pomodoros: 0,
       pausedTime: 0,
       stops: 0
-    }
-    this.days = [...this.days, newDay]
+    };
+    this.days = [...this.days, newDay];
   }
 
   addPomodoro(): void {
@@ -97,9 +97,9 @@ const BREAK_DURATION_LONG = 8;
 export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: ITimerCardProps) {
   const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);
   const [status, setStatus] = useState(STATUS.STOPPED);
-  const secondsToDisplay = secondsRemaining % 60
-  const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60
-  const minutesToDisplay = minutesRemaining % 60
+  const secondsToDisplay = secondsRemaining % 60;
+  const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
+  const minutesToDisplay = minutesRemaining % 60;
   const [timestampPaused, setTimestampPaused] = useState(0);
 
   function getBreakDuration(): number {
@@ -117,19 +117,19 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
       journal.addPausedTime((Date.now() - timestampPaused) / 1000);
     }
     setStatus(STATUS.STARTED);
-  }
+  };
 
   const handlePause = () => {
-    setStatus(STATUS.PAUSED)
+    setStatus(STATUS.PAUSED);
     setTimestampPaused(Date.now());
     console.log(timestampPaused);
-  }
+  };
 
   const handleReset = () => {
     setStatus(STATUS.STOPPED);
     setSecondsRemaining(WORK_DURATION);
     setTaskState(ETaskState.STANDBY);
-  }
+  };
 
   function handleCompleted() {
     setStatus(STATUS.STOPPED);
@@ -164,7 +164,7 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
     },
     status === STATUS.STARTED ? 1000 : 0,
     // passing 0 stops the interval
-  )
+  );
 
   function getTimerStyle(): string {
     if (status !== STATUS.STARTED) {
@@ -216,26 +216,26 @@ export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: IT
 }
 
 function useInterval(callback: () => void, delay: number) {
-  const savedCallback = useRef<() => void>()
+  const savedCallback = useRef<() => void>();
 
   // Remember the latest callback.
   useEffect(() => {
-    savedCallback.current = callback
-  }, [callback])
+    savedCallback.current = callback;
+  }, [callback]);
 
   // Set up the interval.
   useEffect(() => {
     function tick() {
       if (savedCallback?.current) {
-        savedCallback.current()
+        savedCallback.current();
       }
     }
 
     if (delay !== 0) {
-      const id = setInterval(tick, delay)
-      return () => clearInterval(id)
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
     }
-  }, [delay])
+  }, [delay]);
 }
 
-const twoDigits = (num: number) => String(num).padStart(2, '0')
+const twoDigits = (num: number) => String(num).padStart(2, '0');

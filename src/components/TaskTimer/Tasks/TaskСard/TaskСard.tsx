@@ -22,17 +22,17 @@ export function TaskCard({data: task}: {data: ITask}) {
       && !node
     ) {
       setIsDropdownOpen(false);
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     }
   }, []);
 
   function showMenu() {
     if (isDropdownOpen) {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
       setIsDropdownOpen(false);
       return;
     }
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     setIsDropdownOpen(true);
   }
 

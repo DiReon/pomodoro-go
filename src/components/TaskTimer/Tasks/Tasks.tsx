@@ -1,7 +1,7 @@
 import React, {FormEvent, useRef} from 'react';
 import styles from './tasks.module.css';
-import { makeAutoObservable } from "mobx"
-import { observer } from "mobx-react";
+import { makeAutoObservable } from 'mobx';
+import { observer } from 'mobx-react/dist/observer';
 import {ITask} from '../../../interfaces/task.interface';
 import {generateId} from '../../../utils/generateRandomIndex';
 import {TaskCard} from './TaskСard';
@@ -34,9 +34,8 @@ export const Tasks = observer(() => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: FormEvent) {
-    console.log(inputRef.current?.value);
-    if (inputRef.current?.value){
-      const taskWithId = generateId({name: inputRef.current.value, pomodoros: 1})
+    if (inputRef.current?.value) {
+      const taskWithId = generateId({name: inputRef.current.value, pomodoros: 1});
       taskManager.addTask(taskWithId);
       inputRef.current.value = '';
     }

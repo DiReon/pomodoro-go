@@ -13,7 +13,7 @@ export function DeleteTask({task}: {task: ITask}) {
   }
 
   return (
-    <button onClick={() => {setIsModalOpen(true)}} className={styles.menuItem}>
+    <button onClick={() => {setIsModalOpen(true);}} className={styles.menuItem}>
       <TrashIcon /><span>Удалить</span>
       {isModalOpen && (
         <ConfirmationPopup task={task} onClose={(event) => closeModal(event)} /> || <div />)
