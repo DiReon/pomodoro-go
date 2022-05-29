@@ -18,9 +18,9 @@ interface ITimerCardProps {
   setTaskState: (value: string) => void;
 }
 
-const WORK_DURATION = 10;
+const WORK_DURATION = 25;
 const BREAK_DURATION_SHORT = 5;
-const BREAK_DURATION_LONG = 8;
+const BREAK_DURATION_LONG = 15;
 
 export function TimerCard({task, startNextPomodoro, taskState, setTaskState}: ITimerCardProps) {
   const [secondsRemaining, setSecondsRemaining] = useState(WORK_DURATION);

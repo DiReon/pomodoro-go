@@ -9,7 +9,7 @@ import {transformDuration} from '../../../utils/transform-duration';
 export function DailyAnalisys({day}: {day: IDay}) {
 
   function getFocus(): number {
-    return Math.round(day.pomodoros * 25 / (day.workTime + day.breakTime) * 100);
+    return Math.round(day.pomodoros * 25 / (day.workTime + day.breakTime) * 100) || 0;
   }
 
   function getTimePaused(): string {

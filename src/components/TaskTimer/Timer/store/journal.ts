@@ -1,5 +1,6 @@
 import {IDay} from '../../../../interfaces/day.interface';
 import {makeAutoObservable} from 'mobx';
+import {makePersistable} from 'mobx-persist-store';
 
 class Journal {
   days: IDay[] = [];
@@ -7,7 +8,7 @@ class Journal {
   constructor() {
     makeAutoObservable(this);
 
-    // makePersistable(this, {name: 'Journal', properties: ['days'], storage: window.localStorage});
+    makePersistable(this, {name: 'Journal', properties: ['days'], storage: window.localStorage});
     this.addMockData();
   }
 
@@ -15,7 +16,7 @@ class Journal {
     const date = new Date();
     const dayOfTheMonth = date.getDate();
     for (let i = 0; i < 21; i++) {
-      date.setDate(dayOfTheMonth - i);
+      date.setDate(dayOfTheMonth - 1 - i);
       const dateString = date.toDateString();
       const random = Math.random() * 10;
       const mockDay = {
