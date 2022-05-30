@@ -39,7 +39,7 @@ export function Chart({setSelectedDay, selectedWeek}: IChartProps) {
 
   function getWorkTimeAxisLimit(): number {
     const workTimeArray = getCurrentWeekData().map(item => item?.workTime).filter(item => !!item) as number[];
-    return Math.ceil(Math.max(...workTimeArray) / 25);
+    return workTimeArray.length ? Math.ceil(Math.max(...workTimeArray) / 25) : 2;
   }
 
   function horizontalGridlines(): ReactNode[] {
